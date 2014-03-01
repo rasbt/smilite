@@ -1,5 +1,8 @@
 # Sebastian Raschka, 2014
 
+import urllib.request
+import urllib.parse
+
 def get_zinc_smile(zinc_id):
     """
     Gets the corresponding SMILE string for a ZINC ID query from

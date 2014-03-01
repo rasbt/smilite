@@ -4,6 +4,7 @@
 # molecule comparisons.
 
 from smilite import smilite
+from smilite import query_zinc
 
 __version__ = '0.0.1dev'
 
