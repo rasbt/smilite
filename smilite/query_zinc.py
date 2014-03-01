@@ -26,5 +26,7 @@ def get_zinc_smile(zinc_id):
             break
     return smile_str    
 
+
+
 if __name__ == '__main__':
     print(get_zinc_smile('ZINC00029323'))
