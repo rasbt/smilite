@@ -27,6 +27,24 @@ def get_zinc_smile(zinc_id):
     return smile_str    
 
 
+def generate_zincid_smile_csv(zincid_list, out_file):
+    """ 
+    Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online
+    database.
 
-if __name__ == '__main__':
-    print(get_zinc_smile('ZINC00029323'))
+    Keyword arguments:
+        zincid_list (str): Path to a UTF-8 or ASCII formatted file that contains 1 ZINC_ID
+        per row.
+        E.g., 
+        ZINC0000123456
+        ZINC0000234567
+
+    """
+    id_smile_pairs = []
+    with open(zincid_list, 'r') as infile:
+        for line in infile:
+             line = line.strip()
+             id_smile_pairs.append((line, get_zinc_smile(line)))
+    with open(out_file, 'w') as out:
+        for p in id_smile_pairs:
+            out.write('{},{}\n'.format(p[0], p[1]))
