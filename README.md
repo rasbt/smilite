@@ -109,11 +109,11 @@ ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.
 
 
 **Input example file format:**   
-![](images/zinc_ids.png)  
+![](https://github.com/rasbt/smilite/blob/master/images/zinc_ids.png)  
 (zinc_ids.csv)
 
 **Output example file format:**   
-![](images/zid_smiles.png)  
+![](https://github.com/rasbt/smilite/blob/master/images/zid_smiles.png)  
 (zid_smiles.csv)
 
 <br>
@@ -133,13 +133,13 @@ duplicates listed in a 3rd-nth column(s).
 
 
 **Input example file format:**   
-![](images/zid_smiles.png)  
+![](https://github.com/rasbt/smilite/blob/master/images/zid_smiles.png)  
 (zid_smiles.csv)
 
 
 
 **Output example file format 1:**    
-![](images/comp_smiles.png)  
+![](https://github.com/rasbt/smilite/blob/master/images/comp_smiles.png)  
 (comp_smiles.csv)
 
 
@@ -153,7 +153,7 @@ Where
 `[shell]>> python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify`  
 
 **Output example file format 2:**
-![](images/comp_simple_smiles.png)  
+![](https://github.com/rasbt/smilite/blob/master/images/comp_simple_smiles.png)  
 (comp_simple_smiles.csv)
 
 <br>
