@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Sections</title>
+
+</head>
+<body>
+<p>Copyright 2014 Sebastian Raschka <br><br></p>
+
+<h1>smilite</h1>
+
+<p>smilite is a Python 3 module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, <a href="http://zinc.docking.org">http://zinc.docking.org</a>)</p>
+
+<h4>Sections</h4>
+
+<p><p><a href="#installation">Installation</a><br>
+<p><a href="#documentation">Documentation</a><br>
+<p><a href="#examples">Command Line Scripts Examples</a><br>
+<p><a href="#contact">Contact</a><br>
+<p><a href="#changelog">Changelog</a><br></p>
+
+<p><br>
+<br></p>
+
+<p><p><a name="installation"></a></p></p>
+
+<h1>Installation</h1>
+
+<p>You can use the following command to install PyPrind:<br/>
+<code>pip install smilite</code><br/>
+ or  <br/>
+<code>easy_install smilite</code></p>
+
+<p>Alternatively, you download the package manually from the Python Package Index <a href="https://pypi.python.org/pypi/smilite">https://pypi.python.org/pypi/smilite</a>, unzip it, navigate into the package, and use the command:</p>
+
+<p><code>python3 setup.py install</code></p>
+
+<p><br>
+<br></p>
+
+<p><p><a name="documentation"></a></p></p>
+
+<h1>Documentation</h1>
+
+<p>After you installed the smilite module, you can import it in Python via <code>import smilite</code>.
+The current functions include:</p>
+
+<p><pre>def get_zinc_smile(zinc_id):
+    Gets the corresponding SMILE string for a ZINC ID query from
+    the ZINC online database. Requires an internet connection.
+    Keyword arguments:
+        zinc_id (str): A valid ZINC ID, e.g. 'ZINC00029323'
+    Returns the SMILE string for the corresponding ZINC ID.
+        E.g., 'COc1cccc(c1)NC(=O)c2cccnc2'</pre></p>
+
+<p><pre>def generate_zincid_smile_csv(zincid_list, out_file):
+   Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online
+   database.
+   Keyword arguments:
+        zincid_list (str): Path to a UTF-8 or ASCII formatted file
+             that contains 1 ZINC_ID per row. E.g.,
+             ZINC0000123456
+             ZINC0000234567
+             [...]
+        out_file (str): Path to a new output CSV file that will be written.</pre></p>
+
+<p><pre>def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False):
+   Scans a ZINC_ID,SMILE_string CSV file for duplicate SMILE strings.
+   Keyword arguments:
+        zincid_list (str): Path to a UTF-8 or ASCII formatted file that
+               contains 1 ZINC_ID per row.
+               E.g.,
+               ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC
+               ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
+               [...]
+        out_file (str): Path to a new output CSV file that will be written.
+        compare_simplified_smiles (bool): If true, SMILE strings will be simplified
+               for the comparison.</pre></p>
+
+<p><pre>def simplify_smile(smile_str):
+        Simplifies a SMILE string by removing hydrogen atoms (H),
+        chiral specifications ('@'), charges (+ / -), '#'-characters,
+        and square brackets ('[', ']').
+    Keyword Arguments:
+        smile_str (str): A smile string, e.g., C<a href="CCC(=O">C@H</a>NCCS(=O)(=O)[O-])
+    Returns a simplified SMILE string, e.g., CC(CCC(=O)NCCS(=O)(=O)O)</pre></p>
+
+<p><br>
+<br></p>
+
+<p><p><a name="examples"></a></p></p>
+
+<h1>Command Line Scripts Examples</h1>
+
+<p>If you downloaded the smilite package from <a href="https://pypi.python.org/pypi/smilite">https://pypi.python.org/pypi/smilite</a> or <a href="https://github.com/rasbt/smilite">https://github.com/rasbt/smilite</a>, you can use the command line scripts I provide in the <code>scripts/</code> dir.</p>
+
+<p><br>
+<br></p>
+
+<h3>gen_zincid_smile_csv.py</h3>
+
+<p>Generates a ZINC_ID,SMILE_STR csv file from a input file of
+ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.</p>
+
+<p><strong>Usage:</strong>  <br/>
+<code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py in.csv out.csv</code></p>
+
+<p><strong>Example:</strong>  <br/>
+<code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv</code></p>
+
+<p><strong>Input example file format:</strong> <br/>
+<img src="images/zinc_ids.png" alt="" /><br/>
+(zinc_ids.csv)</p>
+
+<p><strong>Output example file format:</strong> <br/>
+<img src="images/zid_smiles.png" alt="" /><br/>
+(zid_smiles.csv)</p>
+
+<p><br>
+<br></p>
+
+<h3>comp_smile_strings.py</h3>
+
+<p>Compares SMILE strings in a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified
+duplicates listed in a 3rd-nth column(s).</p>
+
+<p><strong>Usage:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_smile_strings.py in.csv out.csv [simplify]</code></p>
+
+<p><strong>Example 1:</strong><br/>
+<code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv</code></p>
+
+<p><strong>Input example file format:</strong> <br/>
+<img src="images/zid_smiles.png" alt="" /><br/>
+(zid_smiles.csv)</p>
+
+<p><strong>Output example file format 1:</strong>  <br/>
+<img src="images/comp_smiles.png" alt="" /><br/>
+(comp_smiles.csv)</p>
+
+<p>Where<br/>
+- 1st column: ZINC ID<br/>
+- 2nd column: SMILE string<br/>
+- 3rd column: number of duplicates<br/>
+- 4th-nth column: ZINC IDs of duplicates</p>
+
+<p><strong>Example 2:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify</code></p>
+
+<p><strong>Output example file format 2:</strong>
+<img src="images/comp_simple_smiles.png" alt="" /><br/>
+(comp_simple_smiles.csv)</p>
+
+<p><br>
+<br></p>
+
+<p><p><a name="contact"></a></p></p>
+
+<h1> Contact</h1>
+
+<p>If you have any questions or comments about PyPrind, please feel free to contact me via<br/>
+eMail: <a href="mailto:se.raschka@gmail.com">se.raschka@gmail.com</a><br/>
+or Twitter: <a href="https://twitter.com/rasbt">@rasbt</a></p>
+
+<p><br>
+<br></p>
+
+<p><p><a name="changelog"></a></p></p>
+
+<h1>Changelog</h1>
+</body>
+</html>

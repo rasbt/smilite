@@ -1,0 +1,6 @@
+zinc_id,smile_str,duplicates
+ZINC83310457,Cc1cccc(c1n2c(cc(c2C)/C=N\NC(=O)C(=O)Nc3ccc(cc3)[N+](=O)[O-])C)C,0,
+ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,0,
+ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC,0,
+ZINC03245324,c1ccc(c(c1)C#N)Sc2ccccc2C(=O)OCC(=O)Nc3ccc4c(c3)OCCO4,0,
+ZINC00029323,COc1cccc(c1)NC(=O)c2cccnc2,1,ZINC00029323,
