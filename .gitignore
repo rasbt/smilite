@@ -1,4 +1,4 @@
-*.txt
+*.swo
 *.sqlite
 gmon.out
 __pycache__
