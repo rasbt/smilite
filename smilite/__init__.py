@@ -9,5 +9,6 @@ from .smilite import generate_zincid_smile_csv
 from .smilite import simplify_smile
 from .smilite import check_duplicate_smiles
 
-__version__ = '1.1.0'
+__version__ = '1.1.1'
+
 

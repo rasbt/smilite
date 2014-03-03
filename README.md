@@ -193,6 +193,10 @@ or Twitter: [@rasbt](https://twitter.com/rasbt)
 Changelog
 ==========
 
+**VERSION 1.1.1**
+
+- PyPrind dependency fix
+
 **VERSION 1.1.0**  
 
 - added a progress bar (pyprind) to `generate_zincid_smile_csv()` function
