@@ -58,9 +58,11 @@ The current functions include:
              ZINC0000123456
              ZINC0000234567
              [...]
-        out_file (str): Path to a new output CSV file that will be written.</pre>
+        out_file (str): Path to a new output CSV file that will be written.
+        print_prgress_bar (bool): Prints a progress bar to the screen if True.</pre>
 
-<pre>def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False):
+<pre>def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False,
+		 print_progress_bar=False):
    Scans a ZINC_ID,SMILE_string CSV file for duplicate SMILE strings.
    Keyword arguments:
         zincid_list (str): Path to a UTF-8 or ASCII formatted file that 
@@ -107,6 +109,12 @@ ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.
 **Example:**    
 `[shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv`
 
+**Screen Output:**  
+<pre>
+Downloading SMILES
+0%                          100%
+[##########                    ] | ETA[sec]: 106.525 </pre>
+
 <br>
 **Input example file format:**   
 ![](https://raw.github.com/rasbt/smilite/master/images/zinc_ids.png)  
@@ -131,6 +139,7 @@ duplicates listed in a 3rd-nth column(s).
 
 **Example 1:**  
 `[shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv`
+
 
 <br>
 
@@ -183,6 +192,11 @@ or Twitter: [@rasbt](https://twitter.com/rasbt)
 
 Changelog
 ==========
+
+**VERSION 1.1.0**  
+
+- added a progress bar (pyprind) to `generate_zincid_smile_csv()` function
+
 
 
 

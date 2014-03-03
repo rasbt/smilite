@@ -5,6 +5,7 @@
 
 import urllib.request
 import urllib.parse
+import pyprind
 
 def get_zinc_smile(zinc_id):
     """
@@ -34,7 +35,7 @@ def get_zinc_smile(zinc_id):
     return smile_str    
 
 
-def generate_zincid_smile_csv(zincid_list, out_file):
+def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=False):
     """
     Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online
     database.
@@ -46,13 +47,19 @@ def generate_zincid_smile_csv(zincid_list, out_file):
              ZINC0000234567
              [...]
         out_file (str): Path to a new output CSV file that will be written.
+        print_prgress_bar (bool): Prints a progress bar to the screen if True.
 
     """
     id_smile_pairs = []
     with open(zincid_list, 'r') as infile:
-        for line in infile:
-             line = line.strip()
-             id_smile_pairs.append((line, get_zinc_smile(line)))
+        all_lines = infile.readlines()
+        if print_progress_bar:
+           pbar = pyprind.ProgBar(len(all_lines), title='Downloading SMILES')
+        for line in all_lines:
+            line = line.strip()
+            id_smile_pairs.append((line, get_zinc_smile(line)))
+            if print_progress_bar:
+                pbar.update()
     with open(out_file, 'w') as out:
         for p in id_smile_pairs:
             out.write('{},{}\n'.format(p[0], p[1]))
@@ -72,11 +79,12 @@ def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=Fals
         out_file (str): Path to a new output CSV file that will be written.
         compare_simplified_smiles (bool): If true, SMILE strings will be simplified
                for the comparison.
-
+       
     """
     smile_dict = dict()
     with open(zincid_list, 'r') as infile:
-        for line in infile:
+        all_lines = infile.readlines()
+        for line in all_lines:
              zinc_id,smile_str = line.strip().split(',')
              if compare_simplified_smiles:
                  smile_str = simplify_smile(smile_str)

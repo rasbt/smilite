@@ -32,7 +32,7 @@ try:
     in_csv = sys.argv[1]
     out_csv = sys.argv[2]
 
-    smilite.generate_zincid_smile_csv(in_csv, out_csv)
+    smilite.generate_zincid_smile_csv(in_csv, out_csv, print_progress_bar=True)
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))

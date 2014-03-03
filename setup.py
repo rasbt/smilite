@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='smilite',
-      version='1.0.0',
+      version='1.1.0',
       description='smilite is a Python 3 module to download and analyze SMILE strings',
       author='Sebastian Raschka',
       author_email='se.raschka@gmail.com',
@@ -21,6 +21,7 @@ setup(name='smilite',
                     ('scripts', ['scripts/comp_smile_strings.py']),
                     ('scripts', ['scripts/gen_zincid_smile_csv.py']),
                    ],
+      install_requires=['pyprind>=2.3.1'],
       license='GPLv3',
       platforms='any',
       classifiers=[
