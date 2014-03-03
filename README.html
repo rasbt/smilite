@@ -213,9 +213,11 @@ The current functions include:</p>
              ZINC0000123456
              ZINC0000234567
              [...]
-        out_file (str): Path to a new output CSV file that will be written.</pre></p>
+        out_file (str): Path to a new output CSV file that will be written.
+        print_prgress_bar (bool): Prints a progress bar to the screen if True.</pre></p>
 
-<p><pre>def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False):
+<p><pre>def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False,
+         print_progress_bar=False):
    Scans a ZINC_ID,SMILE_string CSV file for duplicate SMILE strings.
    Keyword arguments:
         zincid_list (str): Path to a UTF-8 or ASCII formatted file that
@@ -258,6 +260,12 @@ ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.</p>
 
 <p><strong>Example:</strong>  <br/>
 <code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv</code></p>
+
+<p><strong>Screen Output:</strong><br/>
+<pre>
+Downloading SMILES
+0%                          100%
+[##########                    ] | ETA[sec]: 106.525 </pre></p>
 
 <p><br>
 <strong>Input example file format:</strong> <br/>
@@ -332,5 +340,12 @@ or Twitter: <a href="https://twitter.com/rasbt">@rasbt</a></p>
 <p><p><a name="changelog"></a></p></p>
 
 <h1>Changelog</h1>
+
+<p><strong>VERSION 1.1.0</strong></p>
+
+<ul>
+<li>added a progress bar (pyprind) to <code>generate_zincid_smile_csv()</code> function</li>
+</ul>
+
 </body>
 </html>
