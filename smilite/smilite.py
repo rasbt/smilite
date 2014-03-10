@@ -3,9 +3,17 @@
 # Functions to retrieve SMILE strings from the ZINC online database
 # (http://zinc.docking.org)
 
-import urllib.request
-import urllib.parse
+import sys
 import pyprind
+
+
+# Load Python version specific modules
+if sys.version_info[0] == 3:
+    import urllib.request
+    import urllib.parse
+else:
+    import urllib
+
 
 def get_zinc_smile(zinc_id):
     """
@@ -21,8 +29,13 @@ def get_zinc_smile(zinc_id):
     """
     stripped_id = zinc_id.strip('ZINC')
     smile_str = None
-    try: 
-        response = urllib.request.urlopen('http://zinc.docking.org/substance/{}'.format(stripped_id))
+    try:
+        if sys.version_info[0] == 3: 
+            response = urllib.request.urlopen('http://zinc.docking.org/substance/{}'\
+                                             .format(stripped_id))
+        else:
+            response = urllib.urlopen('http://zinc.docking.org/substance/{}'\
+                                             .format(stripped_id))
     except urllib.error.HTTPError:
         print('Invalid ZINC ID {}'.format(zinc_id))
         response = []
@@ -30,7 +43,10 @@ def get_zinc_smile(zinc_id):
         line = line.decode(encoding='UTF-8').strip()
         if line.startswith('<a href="//zinc.docking.org/search/structure?smiles='):
             line = line.split('<a href="//zinc.docking.org/search/structure?smiles=')[-1].split('">Draw</a>')[0]
-            smile_str = urllib.parse.unquote(line)
+            if sys.version_info[0] == 3:
+                smile_str = urllib.parse.unquote(line)
+            else:
+                smile_str = urllib.unquote(line)
             break
     return smile_str    
 

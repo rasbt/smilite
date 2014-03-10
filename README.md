@@ -3,7 +3,8 @@ Copyright 2014 Sebastian Raschka <br><br>
 smilite
 =======
 
-smilite is a Python 3 module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org))
+smilite is a Python module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org))
+Now supports both Python 3.x and Python 2.x.
 
 ####Sections
 <p><a href="#installation">Installation</a><br>
@@ -21,7 +22,7 @@ smilite is a Python 3 module to download and analyze SMILE strings (Simplified M
 
 Installation
 =============
-You can use the following command to install PyPrind:  
+You can use the following command to install smilite:  
 `pip install smilite`  
  or    
 `easy_install smilite`  
@@ -180,7 +181,7 @@ Where
  Contact
 =============
 
-If you have any questions or comments about PyPrind, please feel free to contact me via  
+If you have any questions or comments about smilite, please feel free to contact me via  
 eMail: [se.raschka@gmail.com](mailto:se.raschka@gmail.com)  
 or Twitter: [@rasbt](https://twitter.com/rasbt)
 
@@ -193,13 +194,19 @@ or Twitter: [@rasbt](https://twitter.com/rasbt)
 Changelog
 ==========
 
+**VERSION 1.2.0**
+
+- added Python 2.x support
+
+
 **VERSION 1.1.1**
 
 - PyPrind dependency fix
 
+
 **VERSION 1.1.0**  
 
-- added a progress bar (pyprind) to `generate_zincid_smile_csv()` function
+- added a progress bar (PyPrind) to `generate_zincid_smile_csv()` function
 
 
 

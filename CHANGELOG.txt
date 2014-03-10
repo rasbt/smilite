@@ -1,3 +1,7 @@
+**VERSION 1.2.0**
+
+- added Python 2.x support
+
 **VERSION 1.1.1**
 
 - PyPrind dependency fix
