@@ -3,7 +3,7 @@ Copyright 2014 Sebastian Raschka <br><br>
 smilite
 =======
 
-smilite is a Python module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org))
+smilite is a Python module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org))  
 Now supports both Python 3.x and Python 2.x.
 
 ####Sections
