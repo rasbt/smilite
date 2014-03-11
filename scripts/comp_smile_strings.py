@@ -1,6 +1,6 @@
 # Copyright 2014 Sebastian Raschka
 #
-# Compares SMILE strings in a 2 column CSV file (ZINC_ID,SMILE_string) to
+# Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to
 # identify duplicates. Generates a new CSV file with ZINC IDs of identified
 # duplicates listed in a 3rd-nth column(s).
 #
