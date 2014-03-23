@@ -95,94 +95,91 @@ Downloading SMILES
 
 <h3>comp_smile_strings.py (checking for duplicates within 1 file)</h3>
 
-Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).    
+<p>Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified
+duplicates listed in a 3rd-nth column(s).</p>
 
-<strong>Usage:</strong>  
-`[shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]`
+<p><strong>Usage:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_smile_strings.py in.csv out.csv [simplify]</code></p>
 
-<strong>Example 1:</strong>  
-`[shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv`
+<p><strong>Example 1:</strong><br/>
+<code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv</code></p>
 
+<p><br></p>
 
-<br>
+<p><strong>Input example file format:</strong> <br/>
+<img src="https://raw.github.com/rasbt/smilite/master/images/zid_smiles.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/zid_smiles.csv">zid_smiles.csv</a></p>
 
-<strong>Input example file format:</strong>   
-![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles.png)  
-[zid_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles.csv)
+<p><br></p>
 
-<br>
+<p><strong>Output example file format 1:</strong>  <br/>
+<img src="https://raw.github.com/rasbt/smilite/master/images/comp_smiles.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/comp_smiles.csv">comp_smiles.csv</a></p>
 
-<strong>Output example file format 1:</strong>    
-![](https://raw.github.com/rasbt/smilite/master/images/comp_smiles.png)  
-[comp_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_smiles.csv)
+<p><br></p>
 
-<br>
+<p>Where<br/>
+- 1st column: ZINC ID<br/>
+- 2nd column: SMILE string<br/>
+- 3rd column: number of duplicates<br/>
+- 4th-nth column: ZINC IDs of duplicates</p>
 
-Where  
-- 1st column: ZINC ID  
-- 2nd column: SMILE string  
-- 3rd column: number of duplicates  
-- 4th-nth column: ZINC IDs of duplicates  
+<p><br></p>
 
-<br>
+<p><strong>Example 2:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify</code></p>
 
-<strong>Example 2:</strong>  
-`[shell]>> python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify`  
+<p><br></p>
 
-<br>
+<p><strong>Output example file format 2:</strong>
+<img src="https://raw.github.com/rasbt/smilite/master/images/comp_simple_smiles.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/comp_simple_smiles.csv">comp_simple_smiles.csv</a></p>
 
-<strong>Output example file format 2:</strong>
-![](https://raw.github.com/rasbt/smilite/master/images/comp_simple_smiles.png)  
-[comp_simple_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_simple_smiles.csv)
+<p><br>
+<br></p>
 
-<br>
-<br>
 <p><a name="comp_2_smile"></a></p>
+
 
 <h3>comp_2_smile_files.py (checking for duplicates across 2 files)</h3>
 
-Compares SMILE strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files.  
-Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).  
+<p>Compares SMILE strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files.<br/>
+Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).</p>
 
+<p><strong>Usage:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_2_smile_files.py in1.csv in2.csv out.csv [simplify]</code></p>
 
-<strong>Usage:</strong>  
-`[shell]>> python3 comp_2_smile_files.py in1.csv in2.csv out.csv [simplify]`
+<p><strong>Example:</strong><br/>
+<code>[shell]&gt;&gt; python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv</code></p>
 
-<strong>Example:</strong>  
-`[shell]>> python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv`
+<p><br></p>
 
+<p><strong>Input example file 1:</strong> <br/>
+<img src="https://raw.github.com/rasbt/smilite/master/images/zid_smiles2.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/zid_smiles2.csv">zid_smiles2.csv</a></p>
 
-<br>
+<p><br></p>
 
-<strong>Input example file 1:</strong>   
-![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles2.png)  
-[zid_smiles2.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles2.csv)
+<p><strong>Input example file 2:</strong> <br/>
+<img src="https://raw.github.com/rasbt/smilite/master/images/zid_smiles3.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/zid_smiles3.csv">zid_smiles3.csv</a></p>
 
-<br>
+<p><br></p>
 
-<strong>Input example file 2:</strong>   
-![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles3.png)  
-[zid_smiles3.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles3.csv)
+<p><strong>Output example file format:</strong>  <br/>
+<img src="https://raw.github.com/rasbt/smilite/master/images/comp_2_files.png" alt="" /><br/>
+<a href="https://raw.github.com/rasbt/smilite/master/examples/comp_2_files.csv">comp_2_files.csv</a></p>
 
-<br>
+<p><br></p>
 
-<strong>Output example file format:</strong>    
-![](https://raw.github.com/rasbt/smilite/master/images/comp_2_files.png)  
-[comp_2_files.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_2_files.csv)
+<p>Where:<br/>
+     - 1st column: name of the origin file<br/>
+     - 2nd column: ZINC ID<br/>
+     - 3rd column: SMILE string<br/>
+     - 4th-nth column: ZINC IDs of duplicates</p>
 
-<br>
-
-Where:  
-     - 1st column: name of the origin file  
-     - 2nd column: ZINC ID  
-     - 3rd column: SMILE string  
-     - 4th-nth column: ZINC IDs of duplicates  
-
-
-
-
-<br>
-<br>
+<p><br>
+<br></p>
 
 <p><a name="sqlite_scripts"></a></p>
 
