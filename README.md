@@ -21,7 +21,6 @@ Now supports both Python 3.x and Python 2.x.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#general_func">General functions</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#csvfile_func">CSV file functions</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#sqlite_func">SQLite functions</a><br>
-
 &#8226; <a href="#contact">Contact</a><br>
 &#8226; <a href="#changelog">Changelog</a><br>
 
@@ -67,26 +66,26 @@ If you downloaded the smilite package from [https://pypi.python.org/pypi/smilite
 Generates a ZINC_ID,SMILE_STR csv file from a input file of
 ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.
 
-**Usage:**    
+<strong>Usage:</strong>    
 `[shell]>> python3 gen_zincid_smile_csv.py in.csv out.csv`
 
-**Example:**    
+<strong>Example:</strong>    
 `[shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv`
 
-**Screen Output:**  
+<strong>Screen Output:</strong>  
 <pre>
 Downloading SMILES
 0%                          100%
 [##########                    ] | ETA[sec]: 106.525 </pre>
 
 <br>
-**Input example file format:**   
+<strong>Input example file format:</strong>   
 ![](https://raw.github.com/rasbt/smilite/master/images/zinc_ids.png)  
 [zinc_ids.csv](https://raw.github.com/rasbt/smilite/master/examples/zinc_ids.csv)
 
 <br>
 
-**Output example file format:**   
+<strong>Output example file format:</strong>   
 ![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles.png)  
 [zid_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles.csv)
 
@@ -99,22 +98,22 @@ Downloading SMILES
 Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified
 duplicates listed in a 3rd-nth column(s).
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]`
 
-**Example 1:**  
+<strong>Example 1:</strong>  
 `[shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv`
 
 
 <br>
 
-**Input example file format:**   
+<strong>Input example file format:</strong>   
 ![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles.png)  
 [zid_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles.csv)
 
 <br>
 
-**Output example file format 1:**    
+<strong>Output example file format 1:</strong>    
 ![](https://raw.github.com/rasbt/smilite/master/images/comp_smiles.png)  
 [comp_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_smiles.csv)
 
@@ -128,12 +127,12 @@ Where
 
 <br>
 
-**Example 2:**  
+<strong>Example 2:</strong>  
 `[shell]>> python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify`  
 
 <br>
 
-**Output example file format 2:**
+<strong>Output example file format 2:</strong>
 ![](https://raw.github.com/rasbt/smilite/master/images/comp_simple_smiles.png)  
 [comp_simple_smiles.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_simple_smiles.csv)
 
@@ -147,28 +146,28 @@ Compares SMILE strings between 2 input CSV files, where each file consists of ro
 Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
 
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 comp_2_smile_files.py in1.csv in2.csv out.csv [simplify]`
 
-**Example:**  
+<strong>Example:</strong>  
 `[shell]>> python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv`
 
 
 <br>
 
-**Input example file 1:**   
+<strong>Input example file 1:</strong>   
 ![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles2.png)  
 [zid_smiles2.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles2.csv)
 
 <br>
 
-**Input example file 2:**   
+<strong>Input example file 2:</strong>   
 ![](https://raw.github.com/rasbt/smilite/master/images/zid_smiles3.png)  
 [zid_smiles3.csv](https://raw.github.com/rasbt/smilite/master/examples/zid_smiles3.csv)
 
 <br>
 
-**Output example file format:**    
+<strong>Output example file format:</strong>    
 ![](https://raw.github.com/rasbt/smilite/master/images/comp_2_files.png)  
 [comp_2_files.csv](https://raw.github.com/rasbt/smilite/master/examples/comp_2_files.csv)
 
@@ -205,20 +204,20 @@ from a previously built smilite SQLite database or from the online ZINC database
 
 
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 lookup_single_id.py ZINC_ID [sqlite_file]` 
 <br><br>
 
-**Example1 (retrieve data from a smilite SQLite database):**  
+<strong>Example1 (retrieve data from a smilite SQLite database):</strong>  
 `[shell]>> python3 lookup_single_id.py ZINC01234567 ~/Desktop/smilite_db.sqlite`
 <br><br>
 
-**Example2 (retrieve data from the ZINC online database):**  
+<strong>Example2 (retrieve data from the ZINC online database):</strong>  
 `[shell]>> python3 lookup_single_id.py ZINC01234567`
 <br><br>
 
 
-**Output example:**
+<strong>Output example:</strong>
 <pre>
 ZINC01234567
 C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
@@ -242,20 +241,20 @@ from a previously built smilite SQLite database.
 
 
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 lookup_smile.py sqlite_file SMILE_STRING [simplify]` 
 <br><br>
 
-**Example1 (search for SMILE string):**  
+<strong>Example1 (search for SMILE string):</strong>  
 `[shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"`
 <br><br>
 
-**Example2 (search for simplified SMILE string):**  
+<strong>Example2 (search for simplified SMILE string):</strong>  
 `[shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O" simple`
 <br><br>
 
 
-**Output example:**
+<strong>Output example:</strong>
 <pre>
 ZINC01234567
 C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
@@ -281,17 +280,17 @@ A new database will be created if it doesn't exist, yet.
 
 
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 add_to_sqlite.py sqlite_file csv_file` 
 <br><br>
 
-**Example:**  
+<strong>Example:</strong>  
 `[shell]>> python3 add_to_sqlite.py ~/Desktop/smilite.sqlite ~/Desktop/zinc_ids.csv`
 <br><br>
 
 
 
-**Input CSV file example format:**
+<strong>Input CSV file example format:</strong>
 <pre>
 ZINC01234567
 ZINC01234568
@@ -312,16 +311,16 @@ An example of the smilite SQLite database contents after successful insertion is
 Writes contents of an SQLite smilite database to a CSV file.
 
 
-**Usage:**  
+<strong>Usage:</strong>  
 `[shell]>> python3 sqlite_to_csv.py sqlite_file csv_file` 
 <br><br>
 
-**Example:**  
+<strong>Example:</strong>  
 `[shell]>> python3 sqlite_to_csv.py ~/Desktop/smilite.sqlite ~/Desktop/zinc_smiles.csv`
 <br><br>
 
 
-**Input CSV file example format:**
+<strong>Input CSV file example format:</strong>
 <pre>
 ZINC_ID,SMILE,SIMPLE_SMILE
 ZINC01234568,C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
@@ -470,7 +469,7 @@ The current functions include:
 
 <br>
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">create_sqlite</span>(sqlite_file):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">create_sqlite</span>(sqlite_file):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Creates a new SQLite database file if it doesn&#39;t exist yet.</span>
 <span style="color: #DD4422">    The database created will consists of 3 columns: </span>
@@ -484,7 +483,7 @@ The current functions include:
 <span style="color: #DD4422">    &quot;&quot;&quot;</span>
 </pre></div>
 <br>
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">insert_id_sqlite</span>(sqlite_file, zinc_id):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">insert_id_sqlite</span>(sqlite_file, zinc_id):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Inserts a new ZINC ID into an existing SQLite database if the ZINC ID</span>
 <span style="color: #DD4422">    isn&#39;t contained in the database, yet. Obtains the SMILE string from the</span>
@@ -507,7 +506,7 @@ An example database entry is shown in the image below.
 
 <br>
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Looks up an ZINC ID for a given SMILE string in an existing </span>
 <span style="color: #DD4422">    SQLite database file.    </span>
@@ -532,7 +531,7 @@ An example database entry is shown in the image below.
 
 <br>
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Looks up an ZINC ID for a given SMILE string in an existing </span>
 <span style="color: #DD4422">    SQLite database file.    </span>
@@ -555,7 +554,7 @@ An example database entry is shown in the image below.
 
 <br>
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_dict</span>(sqlite_file):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_dict</span>(sqlite_file):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Returns contents of an SQLite smilite database as Python dictionary object.</span>
 
@@ -579,7 +578,7 @@ An example database entry is shown in the image below.
 
 <br>
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_csv</span>(sqlite_file, csv_file):
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_csv</span>(sqlite_file, csv_file):
     <span style="color: #DD4422">&quot;&quot;&quot;</span>
 <span style="color: #DD4422">    Writes contents of an SQLite smilite database to a CSV file.</span>
 
