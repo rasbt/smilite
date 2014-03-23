@@ -95,7 +95,7 @@ Downloading SMILES
 
 <h3>comp_smile_strings.py (checking for duplicates within 1 file)</h3>
 
-Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).  
+Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).    
 
 <strong>Usage:</strong>  
 `[shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]`
@@ -142,7 +142,7 @@ Where
 <h3>comp_2_smile_files.py (checking for duplicates across 2 files)</h3>
 
 Compares SMILE strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files.  
-Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
+Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).  
 
 
 <strong>Usage:</strong>  
