@@ -61,7 +61,7 @@ If you downloaded the smilite package from [https://pypi.python.org/pypi/smilite
 
 <p><a name="gen_zincid"></a></p>
 
-###gen_zincid_smile_csv.py (downloading SMILES)
+<h3>gen_zincid_smile_csv.py (downloading SMILES)</h3>
 
 Generates a ZINC_ID,SMILE_STR csv file from a input file of
 ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.
@@ -93,7 +93,7 @@ Downloading SMILES
 <br>
 <p><a name="comp_smile"></a></p>
 
-###comp_smile_strings.py (checking for duplicates within 1 file)
+<h3>comp_smile_strings.py (checking for duplicates within 1 file)</h3>
 
 Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified
 duplicates listed in a 3rd-nth column(s).
@@ -140,7 +140,7 @@ Where
 <br>
 <p><a name="comp_2_smile"></a></p>
 
-###comp_2_smile_files.py (checking for duplicates across 2 files)
+<h3>comp_2_smile_files.py (checking for duplicates across 2 files)</h3>
 
 Compares SMILE strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files.  
 Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
@@ -197,7 +197,7 @@ If you downloaded the smilite package from [https://pypi.python.org/pypi/smilite
 <br>
 <p><a name="lookup1id"></a></p>
 
-###lookup_single_id.py
+<h3>lookup_single_id.py</h3>
 
 Retrieves the SMILE string and simplified SMILE string for a given ZINC ID  
 from a previously built smilite SQLite database or from the online ZINC database.
@@ -234,7 +234,8 @@ Where
 <br>
 <br>
 <p><a name="lookupsmile"></a></p>
-###lookup_smile.py
+
+<h3>lookup_smile.py</h3>
 
 Retrieves the ZINC ID(s) for a given SMILE sting or simplified SMILE string
 from a previously built smilite SQLite database.
@@ -271,7 +272,8 @@ Where
 <br>
 <br>
 <p><a name="add_to_sqlite"></a></p>
-###add_to_sqlite.py
+
+<h3>add_to_sqlite.py</h3>
 
 Reads ZINC IDs from a CSV file and looks up SMILE strings and simplified SMILE strings
 from the ZINC online database. Writes those SMILE strings to a smilite SQLite database.
@@ -306,7 +308,8 @@ An example of the smilite SQLite database contents after successful insertion is
 <br>
 <br>
 <p><a name="sqlite_to_csv"></a></p>
-###sqlite_to_csv.py
+
+<h3>sqlite_to_csv.py</h3>
 
 Writes contents of an SQLite smilite database to a CSV file.
 
@@ -354,7 +357,7 @@ The current functions include:
 
 <p><a name="general_func"></a></p>
 
-### General functions
+<h3> General functions </h3>
 
 <br>
 
@@ -392,7 +395,8 @@ The current functions include:
 <br>
 
 <p><a name="csvfile_func"></a></p>
-### CSV file functions
+
+<h3> CSV file functions</h3>
 
 <br>
 
@@ -465,7 +469,8 @@ The current functions include:
 <br>
 
 <p><a name="sqlite_func"></a></p>
-### SQLite functions
+
+<h3> SQLite functions </h3>
 
 <br>
 
