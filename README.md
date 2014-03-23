@@ -6,7 +6,7 @@ smilite
 smilite is a Python module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org)).    
 Now supports both Python 3.x and Python 2.x.
 
-####Sections
+<h4>Sections</h4>
 &#8226; <a href="#installation">Installation</a><br>
 &#8226; <a href="#csv_scripts">CSV file command line scripts</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#gen_zincid">gen_zincid_smile_csv.py (downloading SMILES)</a><br>
@@ -95,8 +95,7 @@ Downloading SMILES
 
 <h3>comp_smile_strings.py (checking for duplicates within 1 file)</h3>
 
-Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified
-duplicates listed in a 3rd-nth column(s).
+Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).  
 
 <strong>Usage:</strong>  
 `[shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]`
