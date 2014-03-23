@@ -58,7 +58,7 @@ try:
     if len(sys.argv) > 4:
         simplify = True
     
-    smilite.comp_two_files(in_csv1, in_csv2, out_csv, compare_simplified_smiles=simplify)
+    smilite.comp_two_csvfiles(in_csv1, in_csv2, out_csv, compare_simplified_smiles=simplify)
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))

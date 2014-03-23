@@ -1,11 +1,15 @@
 # Copyright 2014 Sebastian Raschka
 # 
-# Functions to retrieve SMILE strings from the ZINC online database
-# (http://zinc.docking.org)
+# smilite is a Python module to download and analyze SMILE strings
+# (Simplified Molecular-Input Line-entry System) of chemical compounds
+# from ZINC (a free database of commercially-available compounds for virtual screening:
+# http://zinc.docking.org    
+# Now supports both Python 3.x and Python 2.x.
 
 import sys
+import sqlite3
+import os
 import pyprind
-
 
 # Load Python version specific modules
 if sys.version_info[0] == 3:
@@ -148,9 +152,9 @@ def create_id_smile_list(id_smile_csv, simplify_smiles=False):
     return smile_list
 
 
-def comp_two_files(zincid_list1, zincid_list2, out_file, compare_simplified_smiles=False):
+def comp_two_csvfiles(zincid_list1, zincid_list2, out_file, compare_simplified_smiles=False):
     """
-    Compares SMILE strings across two ZINC_ID files for duplicates 
+    Compares SMILE strings across two ZINC_ID CSV files for duplicates 
     (does not check for duplicates within each file).
 
     Keyword arguments:
@@ -185,6 +189,7 @@ def comp_two_files(zincid_list1, zincid_list2, out_file, compare_simplified_smil
                     out.write(comp[0] + ',')
     print('\nResults written to', out_file)
 
+
 def simplify_smile(smile_str):
     """ 
     Simplifies a SMILE string by removing hydrogen atoms (H), 
@@ -206,3 +211,214 @@ def simplify_smile(smile_str):
             stripped_smile.append(sym)
     return "".join(stripped_smile)
 
+
+def create_sqlite(sqlite_file):
+    """
+    Creates a new SQLite database file if it doesn't exist yet.
+    The database created will consists of 3 columns: 
+        1) 'zinc_id' (ZINC ID as Primary Key)
+        2) 'smile' (SMILE string obtained from the ZINC online db)
+        3) 'simple_smile' (simplified SMILE string, see smilite.simplify_smile())
+    
+    Keyword arguments:
+        sqlite_file (str): Path to the new SQLite database file.
+
+    """
+    if not os.path.exists(sqlite_file):
+        # open connection to a sqlite file object
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor()   
+        
+        # creating a new SQLite table with 3 columns
+        c.execute('CREATE TABLE smilite (zinc_id TEXT PRIMARY KEY, smile TEXT, simple_smile TEXT)')
+
+        # commit changes and close the connection to the sqlite file object.
+        conn.commit()
+        conn.close()
+
+
+def insert_id_sqlite(sqlite_file, zinc_id):
+    """
+    Inserts a new ZINC ID into an existing SQLite database if the ZINC ID
+    isn't contained in the database, yet. Obtains the SMILE string from the
+    ZINC online database and adds it to the new ZINC ID database entry together
+    with an simplified SMILE string.
+
+    Example database entry:
+    zinc_id,smile,simple_smile
+    "ZINC01234567","C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O","CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O"
+
+    Keyword arguments:
+        sqlite_file (str): Path to an existing SQLite database file
+        zinc_id (str): A valid ZINC ID
+
+    Returns True if insertion was successful, else returns False.
+
+    """
+    success = False
+    if os.path.exists(sqlite_file):
+        # open connection to a sqlite file object
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor() 
+
+        # get smile string and simplified smile string
+        smile_str = get_zinc_smile(zinc_id)
+        if smile_str:
+            simple_smile = simplify_smile(smile_str)
+
+        # insert data into database
+        if smile_str and simple_smile:
+            c.execute('INSERT OR IGNORE INTO smilite (zinc_id, smile, simple_smile) VALUES (?, ?, ?)',\
+                    (zinc_id, smile_str, simple_smile))
+            success = True
+
+        # commit changes and close the connection to the sqlite file object.
+        conn.commit()
+        conn.close()
+        return success
+
+    else:
+        return success
+
+
+def lookup_id_sqlite(sqlite_file, zinc_id):
+    """
+    Looks up an ZINC ID in an existing SQLite database file.    
+    
+    Keyword arguments:
+        sqlite_file (str): Path to an existing SQLite database file
+        zinc_id (str): A valid ZINC ID
+
+    Returns a list with the ZINC ID, SMILE string, and simplified SMILE 
+        string or an empty list if ZINC ID could not be found.
+        Example returned list:
+        ['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
+         'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']
+
+    """
+    result = []
+    if os.path.exists(sqlite_file):
+
+        # open connection to a sqlite file object
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor() 
+
+        c.execute('SELECT * FROM smilite WHERE zinc_id=?', (zinc_id,))
+        all_rows = c.fetchall()
+        try:
+            result = [i for i in all_rows[0]]
+        except IndexError:
+            pass
+
+        # close the connection to the sqlite file object.
+        conn.close()
+
+    return result
+
+
+def lookup_smile_sqlite(sqlite_file, smile_str, simple_smile=False):
+    """
+    Looks up an ZINC ID for a given SMILE string in an existing 
+    SQLite database file.    
+    
+    Keyword arguments:
+        sqlite_file (str): Path to an existing SQLite database file
+        smile_str (str): A SMILE string to query the database
+        simple_smile (bool): Queries simplified smile strings in the
+            database if true
+        
+    Returns a list with the ZINC ID, SMILE string, and simplified SMILE 
+        string or an empty list if SMILE string could not be found.
+        Example returned list:
+        ['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
+         'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']
+        If multiple ZINC IDs match the query SMILE string, a list of sublists
+        is returned.
+
+    """
+    result = []
+    if os.path.exists(sqlite_file):
+
+        # open connection to a sqlite file object
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor() 
+        
+        if simple_smile:
+            c.execute('SELECT * FROM smilite WHERE simple_smile=?', (smile_str,))
+        else:
+            c.execute('SELECT * FROM smilite WHERE smile=?', (smile_str,))
+        all_rows = c.fetchall()
+        try:
+            for i in all_rows:
+                result.append([j for j in i])
+        except IndexError:
+            pass
+
+        # close the connection to the sqlite file object.
+        conn.close()
+
+    return result
+
+
+def sqlite_to_dict(sqlite_file):
+    """
+    Returns contents of an SQLite smilite database as Python dictionary object.
+
+    Keyword arguments:
+        sqlite_file (str): Path to an existing SQLite database file
+
+    Returns an SQLite smilite database as Python dictionary object with
+        ZINC IDs as keys and corresponding 
+        [SMILE_string, Simple_SMILE_string] lists as values.
+
+    Example returned dictionary:
+    {
+        'ZINC01234568': ['C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O', 
+                        'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O'], 
+        'ZINC01234567': ['C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O', 
+                        'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']
+    }
+
+    """
+    result = {}
+    if os.path.exists(sqlite_file):
+
+        # open connection to a sqlite file object
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor() 
+       
+        c.execute('SELECT * FROM smilite')
+        all_rows = c.fetchall()
+        try:
+            result = {i[0]: [i[1], i[2]] for i in all_rows}
+        except IndexError:
+            pass
+
+        # close the connection to the sqlite file object.
+        conn.close()
+
+    return result
+
+
+def sqlite_to_csv(sqlite_file, csv_file):
+    """
+    Writes contents of an SQLite smilite database to a CSV file.
+
+    Keyword arguments:
+        sqlite_file (str): Path to an existing SQLite database file
+        csv_file (str): Path to the output CSV file
+
+    Example output CSV file contents:
+
+    ZINC_ID,SMILE,SIMPLE_SMILE
+    ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
+    ZINC01234568,C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
+    ...
+
+    """
+    zinc_dict = sqlite_to_dict(sqlite_file)
+    with open(csv_file, 'a') as out_csv:
+        out_csv.write('ZINC_ID,SMILE,SIMPLE_SMILE\n')
+        for k in zinc_dict.keys():
+            line = '{},{}\n'.format(k, ",".join(zinc_dict[k]))
+            out_csv.write(line)
