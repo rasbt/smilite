@@ -6,7 +6,7 @@
 # [shell]>> python3 sqlite_to_csv.py sqlite_file csv_file
 #
 # Example:
-# [shell]>> python3 sqlite_to_csv.py ~/Desktop/smilite.sqlite ~/Desktop/zinc_smiles.csv#
+# [shell]>> python3 sqlite_to_csv.py ~/Desktop/smilite.sqlite ~/Desktop/zinc_smiles.csv
 #
 # Output CSV file example:
 # ZINC_ID,SMILE,SIMPLE_SMILE
