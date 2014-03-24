@@ -1,3 +1,7 @@
+**VERSION 2.0.1**
+
+- Progress bar for add_to_sqlite.py
+
 **VERSION 2.0.0**
 
 - added SQLite features

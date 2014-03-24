@@ -17,6 +17,6 @@ from .smilite import lookup_smile_sqlite
 from .smilite import sqlite_to_dict
 from .smilite import sqlite_to_csv
 
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 
 

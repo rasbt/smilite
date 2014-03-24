@@ -55,7 +55,7 @@ def get_zinc_smile(zinc_id):
     return smile_str    
 
 
-def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=False):
+def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
     """
     Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online
     database.

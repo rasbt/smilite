@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='smilite',
-      version='2.0.0',
+      version='2.0.1',
       description='smilite is a Python module to download and analyze SMILE strings',
       author='Sebastian Raschka',
       author_email='se.raschka@gmail.com',

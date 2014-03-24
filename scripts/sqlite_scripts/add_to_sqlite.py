@@ -24,6 +24,7 @@
 import smilite
 import sys
 import os
+import pyprind
 
 def print_usage():
     print('\nUSAGE: python3 add_to_sqlite.py sqlite_file csv_file')
@@ -36,7 +37,10 @@ try:
     if not os.path.exists(sqlite_file):
         smilite.create_sqlite(sqlite_file)
     with open(csv_file, 'r') as in_csv:
-        for line in in_csv:
+        all_lines = in_csv.readlines()
+        pbar = pyprind.ProgBar(len(all_lines), title='Downloading SMILES')
+        for line in all_lines:
+            pbar.update()
             line = line.strip()
             if line:
                 zinc_id = line.split(',')[0]

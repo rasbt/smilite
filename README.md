@@ -641,6 +641,12 @@ or Twitter: <a href="https://twitter.com/rasbt">@rasbt</a></p>
 
 <h1>Changelog</h1>
 
+<p><strong>VERSION 2.0.1</strong></p>
+
+<ul>
+<li>Progress bar for add_to_sqlite.py</li>
+</ul>
+
 <p><strong>VERSION 2.0.0</strong></p>
 
 <ul>
