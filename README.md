@@ -11,6 +11,9 @@ Now supports both Python 3.x and Python 2.x.</p>
 <h4>Sections</h4>
 
 <p>&#8226; <a href="#installation">Installation</a><br>
+&#8226; <a href="#simple_cmd_scripts">Simple command line online query scripts</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#lookup_zincid">lookup_zincid.py</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#lookup_smile_str">lookup_smile_str.py</a><br>
 &#8226; <a href="#csv_scripts">CSV file command line scripts</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#gen_zincid">gen_zincid_smile_csv.py (downloading SMILES)</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#45; <a href="#comp_smile">comp_smile_strings.py (checking for duplicates within 1 file)</a><br>
@@ -47,6 +50,86 @@ Now supports both Python 3.x and Python 2.x.</p>
 
 <p><br>
 <br></p>
+
+
+
+<p><a name="simple_cmd_scripts"></a></p>
+
+
+<h1>Simple command line online query scripts</h1>
+
+<p>If you downloaded the smilite package from <a href="https://pypi.python.org/pypi/smilite">https://pypi.python.org/pypi/smilite</a> or <a href="https://github.com/rasbt/smilite">https://github.com/rasbt/smilite</a>, you can use the command line scripts I provide in the <code>scripts/cmd_line_online_query_scripts</code> dir.</p>
+
+<p><br>
+<br></p>
+
+<p><a name="lookup_zincid"></a></p>
+
+
+<h3>lookup_zincid.py</h3>
+
+<p>Retrieves the SMILE string and simplified SMILE string for a given ZINC ID<br>
+from the online ZINC database.
+</p>
+
+<p><strong>Usage:</strong><br/>
+<code>[shell]&gt;&gt; python3 lookup_zincid.py ZINC_ID</code>
+<br><br></p>
+
+<p><strong>Example (retrieve data from ZINC):</strong><br/>
+<code>[shell]&gt;&gt; python3 lookup_zincid.py ZINC01234567</code>
+<br><br></p>
+
+<p><strong>Output example:</strong></p>
+
+<pre>
+ZINC01234567
+C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
+CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
+</pre>
+
+<p>Where<br/>
+- 1st row: ZINC ID <br/>
+- 2nd row: SMILE string <br/>
+- 3rd row: simplified SMILE string</p>
+
+<p><br>
+<br></p>
+
+
+<p><a name="lookup_smile_str"></a></p>
+
+
+<h3>lookup_smile_str.py</h3>
+
+<p>Retrieves the corresponding ZINC_IDs for a given SMILE string<br>
+from the online ZINC database.
+</p>
+
+<p><strong>Usage:</strong><br/>
+<code>[shell]&gt;&gt; python3 ookup_smile_str.py SMILE_str</code>
+<br><br></p>
+
+<p><strong>Example (retrieve data from ZINC):</strong><br/>
+<code>[shell]&gt;&gt; python3 lookup_smile_str.py "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"</code>
+<br><br></p>
+
+<p><strong>Output example:</strong></p>
+
+<pre>
+ZINC01234567
+ZINC01234568
+ZINC01242053
+ZINC01242055</pre>
+
+
+<p><br>
+<br></p>
+
+
+
+
+
 
 <p><a name="csv_scripts"></a></p>
 
@@ -368,6 +451,23 @@ The current functions include:</p>
 
 <p><br></p>
 
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_zincid_from_smile</span>(smile_str):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">    Gets the corresponding ZINC ID(s) for a SMILE string query from</span>
+<span style="color: #DD4422">    the ZINC online database. Requires an internet connection.</span>
+
+<span style="color: #DD4422">    Keyword arguments:</span>
+<span style="color: #DD4422">        smile_str (str): A valid SMILE string, e.g. &#39;C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O&#39; </span>
+
+<span style="color: #DD4422">    Returns the SMILE string for the corresponding ZINC ID(s) in a list.</span>
+<span style="color: #DD4422">        E.g., [&#39;ZINC01234567&#39;, &#39;ZINC01234568&#39;, &#39;ZINC01242053&#39;, &#39;ZINC01242055&#39;]</span>
+
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+</pre></div>
+
+<p><br></p>
+
+
 <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">simplify_smile</span>(smile_str):
     <span style="color: #DD4422">&quot;&quot;&quot; </span>
 <span style="color: #DD4422">    Simplifies a SMILE string by removing hydrogen atoms (H), </span>
@@ -382,9 +482,12 @@ The current functions include:</p>
 <span style="color: #DD4422">    &quot;&quot;&quot;</span>
 </pre></div>
 
-
 <p><br>
 <br></p>
+
+
+
+
 
 <p><a name="csvfile_func"></a></p>
 
@@ -640,6 +743,12 @@ or Twitter: <a href="https://twitter.com/rasbt">@rasbt</a></p>
 
 
 <h1>Changelog</h1>
+
+<p><strong>VERSION 2.1.0</strong></p>
+
+<ul>
+<li>Functions and scripts to fetch ZINC IDs corresponding to a SMILE string query</li>
+</ul>
 
 <p><strong>VERSION 2.0.1</strong></p>
 

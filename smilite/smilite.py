@@ -55,6 +55,48 @@ def get_zinc_smile(zinc_id):
     return smile_str    
 
 
+def get_zincid_from_smile(smile_str):
+    """
+    Gets the corresponding ZINC ID(s) for a SMILE string query from
+    the ZINC online database. Requires an internet connection.
+
+    Keyword arguments:
+        smile_str (str): A valid SMILE string, e.g. 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O' 
+
+    Returns the SMILE string for the corresponding ZINC ID(s) in a list.
+        E.g., ['ZINC01234567', 'ZINC01234568', 'ZINC01242053', 'ZINC01242055']
+
+    """
+    stripped_smile = smile_str.strip()
+   
+    zinc_ids = []
+    url_part1 = 'http://zinc.docking.org/results?structure.smiles='
+    url_part3 = '&structure.similarity=1.0'
+    try:
+        if sys.version_info[0] == 3:
+            smile_url = urllib.request.pathname2url(stripped_smile) 
+            response = urllib.request.urlopen('{}{}{}'\
+                                             .format(url_part1, smile_url, url_part3))
+        else:
+            smile_url = urllib.pathname2url(stripped_smile)
+            response = urllib.urlopen('{}{}{}'\
+                                             .format(url_part1, smile_url, url_part3))
+    except urllib.error.HTTPError:
+        print('Invalid SMILE string {}'.format(smile_str))
+        response = []
+    for line in response:
+        line = line.decode(encoding='UTF-8').strip()
+        if line.startswith('<a href="//zinc.docking.org/substance/'):
+            line = line.split('</a>')[-2].split('>')[-1]
+            if sys.version_info[0] == 3:
+                zinc_id = urllib.parse.unquote(line)
+            else:
+                zinc_id = urllib.unquote(line)
+            zinc_id = 'ZINC' + (8-len(zinc_id)) *'0' + zinc_id
+            zinc_ids.append(str(zinc_id))
+    return zinc_ids    
+     
+
 def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
     """
     Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online

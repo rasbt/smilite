@@ -16,7 +16,8 @@ from .smilite import lookup_id_sqlite
 from .smilite import lookup_smile_sqlite
 from .smilite import sqlite_to_dict
 from .smilite import sqlite_to_csv
+from .smilite import get_zincid_from_smile
 
-__version__ = '2.0.1'
+__version__ = '2.1.0'
 
 

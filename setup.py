@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='smilite',
-      version='2.0.1',
+      version='2.1.0',
       description='smilite is a Python module to download and analyze SMILE strings',
       author='Sebastian Raschka',
       author_email='se.raschka@gmail.com',
@@ -28,7 +28,8 @@ setup(name='smilite',
                     ('scripts', ['scripts/sqlite_scripts/lookup_smile.py']),
                     ('scripts', ['scripts/sqlite_scripts/add_to_sqlite.py']),
                     ('scripts', ['scripts/sqlite_scripts/sqlite_to_csv.py']),
-
+                    ('scripts', ['scripts/cmd_line_online_query_scripts/lookup_zincid.py']),
+                    ('scripts', ['scripts/cmd_line_online_query_scripts/lookup_smile_str.py']),
                    ],
       install_requires=['PyPrind>=2.3.1'],
       license='GPLv3',

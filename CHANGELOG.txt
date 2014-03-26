@@ -1,3 +1,7 @@
+**VERSION 2.1.0**
+
+- Functions and scripts to fetch ZINC IDs corresponding to a SMILE string query
+
 **VERSION 2.0.1**
 
 - Progress bar for add_to_sqlite.py
