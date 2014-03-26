@@ -107,7 +107,7 @@ from the online ZINC database.
 </p>
 
 <p><strong>Usage:</strong><br/>
-<code>[shell]&gt;&gt; python3 ookup_smile_str.py SMILE_str</code>
+<code>[shell]&gt;&gt; python3 lookup_smile_str.py SMILE_str</code>
 <br><br></p>
 
 <p><strong>Example (retrieve data from ZINC):</strong><br/>
