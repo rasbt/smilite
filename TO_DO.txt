@@ -1,0 +1,23 @@
+smilite `smile_to_zincid` extension
+===================================
+
+
+[ ]update version in changelog
+[ ]update version in setup.py
+[ ]update version in __init__
+[ ]implement and test def `smile_to_id()`
+[ ]make simple online_query_scripts/ dir
+     [ ]lookup_smile.py
+     [ ]lookup_zincid.py
+     [ ]add scripts to setup.py data dict
+[ ]create csv_scripts/gen_smile_zinc_id_csv.py (same output structure as from gen_zincid_smile_csv.py)
+[ ]modify sqlite_scripts/lookup_smile.py
+[ ]split sqlite_scripts/add_to_sqlite.py into
+     [ ]sqlite_scripts/add_to_sqlite_from_id.py
+     [ ]sqlite_scripts/add_to_sqlite_from_smile.py
+[ ]sqlite_scripts/
+[ ]update README.md
+[ ]convert to README.html
+[ ]upload smilite code to PyPi
+[ ]upload README.html to PyPi
+[ ]update documentation on website
