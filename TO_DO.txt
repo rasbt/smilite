@@ -5,7 +5,7 @@ smilite `smile_to_zincid` extension
 [ ]update version in changelog
 [ ]update version in setup.py
 [ ]update version in __init__
-[ ]implement and test def `smile_to_id()`
+[ ]implement and test def `smile_to_zincid()`
 [ ]make simple online_query_scripts/ dir
      [ ]lookup_smile.py
      [ ]lookup_zincid.py
