@@ -12,6 +12,8 @@ examples/zid_smiles.csv
 examples/zid_smiles2.csv
 examples/zid_smiles3.csv
 examples/zinc_ids.csv
+scripts/cmd_line_online_query_scripts/lookup_smile_str.py
+scripts/cmd_line_online_query_scripts/lookup_zincid.py
 scripts/csv_scripts/comp_2_smile_files.py
 scripts/csv_scripts/comp_smile_strings.py
 scripts/csv_scripts/gen_zincid_smile_csv.py
