@@ -15,6 +15,7 @@ smilite `smile_to_zincid` extension
 [ ]split sqlite_scripts/add_to_sqlite.py into
      [ ]sqlite_scripts/add_to_sqlite_from_id.py
      [ ]sqlite_scripts/add_to_sqlite_from_smile.py
+     [ ]add/modify script paths in setup.py data dict
 [ ]sqlite_scripts/
 [ ]update README.md
 [ ]convert to README.html
