@@ -189,7 +189,7 @@ duplicates listed in a 3rd-nth column(s).</p>
 <code>[shell]&gt;&gt; python3 comp_smile_strings.py in.csv out.csv [simplify]</code></p>
 
 <p><strong>Example 1:</strong><br/>
-<code>[shell]&gt;&gt; python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv</code></p>
+<code>[shell]&gt;&gt; python3 comp_smile_strings.py ../examples/zinc_smiles.csv ../examples/comp_smiles.csv</code></p>
 
 <p><br></p>
 
