@@ -49,7 +49,7 @@ of chemical compounds from ZINC
 Now supports both Python 3.x and Python 2.x.
 
 
- Contact
+Contact
 =============
 
 If you have any questions or comments about smilite, please feel free to contact me via
