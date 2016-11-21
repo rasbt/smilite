@@ -44,7 +44,7 @@ Now supports both Python 3.x and Python 2.x.</p>
  or  <br/>
 <code>easy_install smilite</code></p>
 
-<p>Alternatively, you download the package manually from the Python Package Index <a href="https://pypi.python.org/pypi/smilite">https://pypi.python.org/pypi/smilite</a>, unzip it, navigate into the package, and use the command:</p>
+<p>Alternatively, you can download the package manually from the Python Package Index <a href="https://pypi.python.org/pypi/smilite">https://pypi.python.org/pypi/smilite</a>, unzip it, navigate into the package, and use the command:</p>
 
 <p><code>python3 setup.py install</code></p>
 
