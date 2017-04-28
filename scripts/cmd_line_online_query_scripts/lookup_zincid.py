@@ -28,9 +28,10 @@ import sys
 
 
 def print_usage():
-    print('\nUSAGE: python3 lookup_zincid.py ZINC_ID')
-    print('\n\nEXAMPLE (retrieve data from ZINC):\n'
-          'python3 lookup_zincid.py ZINC01234567')
+    print('\nUSAGE: python3 lookup_zincid.py ZINC_ID [zinc12 (default)/zinc15]')
+    print('\n\nEXAMPLES (retrieve data from ZINC):\n'
+          '1) python3 lookup_zincid.py ZINC01234567 zinc12\n'
+          '2) python3 lookup_zincid.py ZINC01234567 zinc15')
 
 
 smile_str = ''
@@ -39,7 +40,12 @@ simple_smile_str = ''
 try:
     zinc_id = sys.argv[1]
 
-    smile_str = smilite.get_zinc_smile(zinc_id)
+    if len(sys.argv) >= 3:
+        backend = sys.argv[2]
+    else:
+        backend = 'zinc12'
+
+    smile_str = smilite.get_zinc_smile(zinc_id, backend=backend)
     if smile_str:
         simple_smile_str = smilite.simplify_smile(smile_str)
     print('{}\n{}\n{}'.format(zinc_id, smile_str, simple_smile_str))

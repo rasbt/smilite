@@ -20,38 +20,60 @@ else:
     import urllib
 
 
-def get_zinc_smile(zinc_id):
+def get_zinc_smile(zinc_id, backend='zinc12'):
     """
     Gets the corresponding SMILE string for a ZINC ID query from
     the ZINC online database. Requires an internet connection.
 
     Keyword arguments:
         zinc_id (str): A valid ZINC ID, e.g. 'ZINC00029323'
+        backend (str): zinc12 or zinc15
 
     Returns the SMILE string for the corresponding ZINC ID.
         E.g., 'COc1cccc(c1)NC(=O)c2cccnc2'
 
     """
+    if backend not in {'zinc12', 'zinc15'}:
+        raise ValueError("backend must be 'zinc12' or 'zinc15'")
+
     stripped_id = zinc_id.strip('ZINC')
+
+    if backend == 'zinc12':
+        min_len = 8
+        base_path = 'http://zinc.docking.org/substance/'
+        line_lookup = ('<a href="//zinc.docking.org'
+                       '/search/structure?smiles=')
+        first_linesplit = line_lookup
+        second_linesplit = '">Draw</a>'
+
+    else:
+        min_len = 12
+        base_path = 'http://zinc15.docking.org/substances/'
+        line_lookup = 'id="substance-smiles-field" readonly value="'
+        first_linesplit = line_lookup
+        second_linesplit = '">'
+
+    while len(stripped_id) < min_len:
+        stripped_id = '0' + stripped_id
+
     smile_str = None
+
     try:
         if sys.version_info[0] == 3:
             response = urllib.request.urlopen(
-                'http://zinc.docking.org/substance/{}'
-                .format(stripped_id))
+                '{}{}'
+                .format(base_path, stripped_id))
         else:
-            response = urllib.urlopen('http://zinc.docking.org/substance/{}'
-                                      .format(stripped_id))
+            response = urllib.urlopen('{}{}'
+                                      .format(base_path, stripped_id))
     except urllib.error.HTTPError:
         print('Invalid ZINC ID {}'.format(zinc_id))
         response = []
     for line in response:
         line = line.decode(encoding='UTF-8').strip()
-        if line.startswith('<a href="//zinc.docking.org'
-                           '/search/structure?smiles='):
-            line = (line.split('<a href="//zinc.docking.org/'
-                               'search/structure?smiles=')[-1]
-                    .split('">Draw</a>')[0])
+        if line_lookup in line:
+            line = (line.split(first_linesplit)[-1]
+                    .split(second_linesplit)[0])
             if sys.version_info[0] == 3:
                 smile_str = urllib.parse.unquote(line)
             else:
@@ -107,7 +129,8 @@ def get_zincid_from_smile(smile_str):
     return zinc_ids
 
 
-def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
+def generate_zincid_smile_csv(zincid_list, out_file,
+                              print_progress_bar=True, backend='zinc12'):
     """
     Generates a CSV file of ZINC_ID,SMILE_string entries
     by querying the ZINC online database.
@@ -129,7 +152,8 @@ def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
             pbar = pyprind.ProgBar(len(all_lines), title='Downloading SMILES')
         for line in all_lines:
             line = line.strip()
-            id_smile_pairs.append((line, get_zinc_smile(line)))
+            id_smile_pairs.append((line, get_zinc_smile(line,
+                                                        backend=backend)))
             if print_progress_bar:
                 pbar.update()
     with open(out_file, 'w') as out:
@@ -293,7 +317,7 @@ def create_sqlite(sqlite_file):
         conn.close()
 
 
-def insert_id_sqlite(sqlite_file, zinc_id):
+def insert_id_sqlite(sqlite_file, zinc_id, backend='zinc12'):
     """
     Inserts a new ZINC ID into an existing SQLite database if the ZINC ID
     isn't contained in the database, yet. Obtains the SMILE string from the
@@ -318,7 +342,7 @@ def insert_id_sqlite(sqlite_file, zinc_id):
         c = conn.cursor()
 
         # get smile string and simplified smile string
-        smile_str = get_zinc_smile(zinc_id)
+        smile_str = get_zinc_smile(zinc_id, backend=backend)
         if smile_str:
             simple_smile = simplify_smile(smile_str)
 

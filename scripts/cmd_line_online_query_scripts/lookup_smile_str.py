@@ -27,7 +27,7 @@ def print_usage():
     print('\nUSAGE: python3 ookup_smile_str.py SMILE_str')
     print('\n\nEXAMPLE (retrieve data from ZINC):\n'
           'python3 lookup_smile_str.py'
-          ' "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"')
+          ' C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"')
 
 
 zinc_id = [None]
