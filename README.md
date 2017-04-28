@@ -1,7 +1,8 @@
 # smilite
 
-smilite is a Python module to download and analyze SMILE strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org)).  
+smilite is a Python module to download and analyze SMILES strings (Simplified Molecular-Input Line-entry System) of chemical compounds from ZINC (a free database of commercially-available compounds for virtual screening, [http://zinc.docking.org](http://zinc.docking.org)).  
 Now supports both Python 3.x and Python 2.x.
+
 
 ![](https://raw.github.com/rasbt/smilite/master/images/smilite_overview.png)  
 
@@ -20,12 +21,6 @@ Now supports both Python 3.x and Python 2.x.
       - [lookup_smile.py](#lookupsmile)  
       - [add_to_sqlite.py](#add_to_sqlite)  
       - [sqlite_to_csv.py](#sqlite_to_csv)  
-• [Documentation](#documentation)  
-      - [General functions](#general_func)  
-      - [CSV file functions](#csvfile_func)  
-      - [SQLite functions](#sqlite_func)  
-
-• [Contact](#contact)  
 • [Changelog](#changelog)  
 
 <a name="installation"></a>
@@ -51,7 +46,7 @@ If you downloaded the smilite package from [https://pypi.python.org/pypi/smilite
 
 ### lookup_zincid.py
 
-Retrieves the SMILE string and simplified SMILE string for a given ZINC ID  
+Retrieves the SMILES string and simplified SMILES string for a given ZINC ID  
 from the online Zinc. It uses [ZINC12](http://zinc.docking.org) as the default backend, and via an additional commandline argument `zinc15`, the [ZINC15](http://zinc15.docking.org) database will be used instead.
 
 **Usage:**  
@@ -69,14 +64,14 @@ CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
 
 Where  
 - 1st row: ZINC ID  
-- 2nd row: SMILE string  
-- 3rd row: simplified SMILE string
+- 2nd row: SMILES string  
+- 3rd row: simplified SMILES string
 
 <a name="lookup_smile_str"></a>
 
 ### lookup_smile_str.py
 
-Retrieves the corresponding ZINC_IDs for a given SMILE string  
+Retrieves the corresponding ZINC_IDs for a given SMILES string  
 from the online ZINC database. 
 
 **Usage:**  
@@ -128,7 +123,7 @@ Generates a ZINC_ID,SMILE_STR csv file from a input file of ZINC IDs. The input 
 
 ### comp_smile_strings.py (checking for duplicates within 1 file)
 
-Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
+Compares SMILES strings within a 2 column CSV file (ZINC_ID,SMILE_string) to identify duplicates. Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
 
 **Usage:**  
 `[shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]`
@@ -146,7 +141,7 @@ Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to iden
 
 Where  
 - 1st column: ZINC ID  
-- 2nd column: SMILE string  
+- 2nd column: SMILES string  
 - 3rd column: number of duplicates  
 - 4th-nth column: ZINC IDs of duplicates
 
@@ -160,7 +155,7 @@ Where
 
 ### comp_2_smile_files.py (checking for duplicates across 2 files)
 
-Compares SMILE strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files.  
+Compares SMILES strings between 2 input CSV files, where each file consists of rows with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILES string across both files.  
 Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-nth column(s).
 
 **Usage:**  
@@ -184,7 +179,7 @@ Generates a new CSV file with ZINC IDs of identified duplicates listed in a 3rd-
 Where:  
 - 1st column: name of the origin file  
 - 2nd column: ZINC ID  
-- 3rd column: SMILE string  
+- 3rd column: SMILES string  
 - 4th-nth column: ZINC IDs of duplicates
 
 <a name="sqlite_scripts"></a>
@@ -197,7 +192,7 @@ If you downloaded the smilite package from [https://pypi.python.org/pypi/smilite
 
 ### lookup_single_id.py
 
-Retrieves the SMILE string and simplified SMILE string for a given ZINC ID  
+Retrieves the SMILES string and simplified SMILES string for a given ZINC ID  
 from a previously built smilite SQLite database or from the online ZINC database.
 
 **Usage:**  
@@ -218,22 +213,22 @@ CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
 
 Where  
 - 1st row: ZINC ID  
-- 2nd row: SMILE string  
-- 3rd row: simplified SMILE string
+- 2nd row: SMILES string  
+- 3rd row: simplified SMILES string
 
 <a name="lookupsmile"></a>
 
 ### lookup_smile.py
 
-Retrieves the ZINC ID(s) for a given SMILE sting or simplified SMILE string from a previously built smilite SQLite database.
+Retrieves the ZINC ID(s) for a given SMILES string or simplified SMILES string from a previously built smilite SQLite database.
 
 **Usage:**  
 `[shell]>> python3 lookup_smile.py sqlite_file SMILE_STRING [simplify]`  
 
-**Example1 (search for SMILE string):**  
+**Example1 (search for SMILES string):**  
 `[shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"`  
 
-**Example2 (search for simplified SMILE string):**  
+**Example2 (search for simplified SMILES string):**  
 `[shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O" simple`  
 
 **Output example:**
@@ -245,14 +240,14 @@ CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O
 
 Where  
 - 1st row: ZINC ID  
-- 2nd row: SMILE string  
-- 3rd row: simplified SMILE string
+- 2nd row: SMILES string  
+- 3rd row: simplified SMILES string
 
 <a name="add_to_sqlite"></a>
 
 ### add_to_sqlite.py
 
-Reads ZINC IDs from a CSV file and looks up SMILE strings and simplified SMILE strings from the ZINC online database. Writes those SMILE strings to a smilite SQLite database. A new database will be created if it doesn't exist, yet.
+Reads ZINC IDs from a CSV file and looks up SMILES strings and simplified SMILES strings from the ZINC online database. Writes those SMILES strings to a smilite SQLite database. A new database will be created if it doesn't exist, yet.
 
 **Usage:**  
 `[shell]>> python3 add_to_sqlite.py sqlite_file csv_file`  
@@ -290,302 +285,19 @@ ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)
 
 An example of the CSV file contents opened in an spreadsheet program is shown in the image below. ![https://raw.github.com/rasbt/smilite/master/images/sqlite_to_csv_2.png](https://raw.github.com/rasbt/smilite/master/images/sqlite_to_csv_2.png)
 
-<a name="documentation"></a>
 
-# Documentation
-
-After you installed the smilite module, you can import it in Python via `import smilite`. The current functions include:
-
-<a name="general_func"></a>
-
-### General functions
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_zinc_smile</span>(zinc_id):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Gets the corresponding SMILE string for a ZINC ID query from</span>
- <span style="color: #DD4422">the ZINC online database. Requires an internet connection.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">zinc_id (str): A valid ZINC ID, e.g. 'ZINC00029323'</span>
-
- <span style="color: #DD4422">Returns the SMILE string for the corresponding ZINC ID.</span>
- <span style="color: #DD4422">E.g., 'COc1cccc(c1)NC(=O)c2cccnc2'</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_zincid_from_smile</span>(smile_str):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Gets the corresponding ZINC ID(s) for a SMILE string query from</span>
- <span style="color: #DD4422">the ZINC online database. Requires an internet connection.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">smile_str (str): A valid SMILE string, e.g. 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O'</span> 
-
- <span style="color: #DD4422">Returns the SMILE string for the corresponding ZINC ID(s) in a list.</span>
- <span style="color: #DD4422">E.g., ['ZINC01234567', 'ZINC01234568', 'ZINC01242053', 'ZINC01242055']</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">simplify_smile</span>(smile_str):
-    <span style="color: #DD4422">"""</span> 
- <span style="color: #DD4422">Simplifies a SMILE string by removing hydrogen atoms (H),</span> 
- <span style="color: #DD4422">chiral specifications ('@'), charges (+ / -), '#'-characters,</span>
- <span style="color: #DD4422">and square brackets ('[', ']').</span>
-
- <span style="color: #DD4422">Keyword Arguments:</span>
- <span style="color: #DD4422">smile_str (str): A smile string, e.g., C[C@H](CCC(=O)NCCS(=O)(=O)[O-])</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Returns a simplified SMILE string, e.g., CC(CCC(=O)NCCS(=O)(=O)O)</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<a name="csvfile_func"></a>
-
-### CSV file functions
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">generate_zincid_smile_csv</span>(zincid_list, out_file, print_progress_bar<span style="color: #333333">=</span><span style="color: #007020">False</span>):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online</span>
- <span style="color: #DD4422">database.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">zincid_list (str): Path to a UTF-8 or ASCII formatted file</span> 
- <span style="color: #DD4422">that contains 1 ZINC_ID per row. E.g.,</span> 
- <span style="color: #DD4422">ZINC0000123456</span>
- <span style="color: #DD4422">ZINC0000234567</span>
- <span style="color: #DD4422">[...]</span>
- <span style="color: #DD4422">out_file (str): Path to a new output CSV file that will be written.</span>
- <span style="color: #DD4422">print_prgress_bar (bool): Prints a progress bar to the screen if True.</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">check_duplicate_smiles</span>(zincid_list, out_file, compare_simplified_smiles<span style="color: #333333">=</span><span style="color: #007020">False</span>):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Scans a ZINC_ID,SMILE_string CSV file for duplicate SMILE strings.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">zincid_list (str): Path to a UTF-8 or ASCII formatted file that</span> 
- <span style="color: #DD4422">contains 1 ZINC_ID + 1 SMILE String per row.</span>
- <span style="color: #DD4422">E.g.,</span> 
- <span style="color: #DD4422">ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC</span>
- <span style="color: #DD4422">ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O</span>
- <span style="color: #DD4422">[...]</span>
- <span style="color: #DD4422">out_file (str): Path to a new output CSV file that will be written.</span>
- <span style="color: #DD4422">compare_simplified_smiles (bool): If true, SMILE strings will be simplified</span>
- <span style="color: #DD4422">for the comparison.</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">comp_two_csvfiles</span>(zincid_list1, zincid_list2, out_file, compare_simplified_smiles<span style="color: #333333">=</span><span style="color: #007020">False</span>):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Compares SMILE strings across two ZINC_ID CSV files for duplicates</span> 
- <span style="color: #DD4422">(does not check for duplicates within each file).</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">zincid_list1 (str): Path to a UTF-8 or ASCII formatted file that</span> 
- <span style="color: #DD4422">contains 1 ZINC_ID + 1 SMILE String per row.</span>
- <span style="color: #DD4422">E.g.,</span> 
- <span style="color: #DD4422">ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC</span>
- <span style="color: #DD4422">ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O</span>
- <span style="color: #DD4422">[...]</span>
- <span style="color: #DD4422">zincid_list2 (str): Second ZINC_ID list file, similarly</span> 
- <span style="color: #DD4422">out_file (str): Path to a new output CSV file that will be written.</span>
- <span style="color: #DD4422">compare_simplified_smiles (bool): If true, SMILE strings will be simplified</span>
- <span style="color: #DD4422">for the comparison.</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<a name="sqlite_func"></a>
-
-### SQLite functions
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">create_sqlite</span>(sqlite_file):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Creates a new SQLite database file if it doesn't exist yet.</span>
- <span style="color: #DD4422">The database created will consists of 3 columns:</span> 
- <span style="color: #DD4422">1) 'zinc_id' (ZINC ID as Primary Key)</span>
- <span style="color: #DD4422">2) 'smile' (SMILE string obtained from the ZINC online db)</span>
- <span style="color: #DD4422">3) 'simple_smile' (simplified SMILE string, see smilite.simplify_smile())</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to the new SQLite database file.</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">insert_id_sqlite</span>(sqlite_file, zinc_id):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Inserts a new ZINC ID into an existing SQLite database if the ZINC ID</span>
- <span style="color: #DD4422">isn't contained in the database, yet. Obtains the SMILE string from the</span>
- <span style="color: #DD4422">ZINC online database and adds it to the new ZINC ID database entry together</span>
- <span style="color: #DD4422">with an simplified SMILE string.</span>
-
- <span style="color: #DD4422">Example database entry:</span>
- <span style="color: #DD4422">zinc_id,smile,simple_smile</span>
- <span style="color: #DD4422">"ZINC01234567","C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O","CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O"</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to an existing SQLite database file</span>
- <span style="color: #DD4422">zinc_id (str): A valid ZINC ID</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-An example database entry is shown in the image below. ![https://raw.github.com/rasbt/smilite/master/images/insert_id_sqlite_1.png](https://raw.github.com/rasbt/smilite/master/images/insert_id_sqlite_1.png)
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Looks up an ZINC ID for a given SMILE string in an existing</span> 
- <span style="color: #DD4422">SQLite database file.</span> 
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to an existing SQLite database file</span>
- <span style="color: #DD4422">smile_str (str): A SMILE string to query the database</span>
- <span style="color: #DD4422">simple_smile (bool): Queries simplified smile strings in the</span>
- <span style="color: #DD4422">database if true</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Returns a list with the ZINC ID, SMILE string, and simplified SMILE</span> 
- <span style="color: #DD4422">string or an empty list if SMILE string could not be found.</span>
- <span style="color: #DD4422">Example returned list:</span>
- <span style="color: #DD4422">['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',</span>
- <span style="color: #DD4422">'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']</span>
- <span style="color: #DD4422">If multiple ZINC IDs match the query SMILE string, a list of sublists</span>
- <span style="color: #DD4422">is returned.</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">lookup_smile_sqlite</span>(sqlite_file, smile_str, simple_smile<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">False</span>):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Looks up an ZINC ID for a given SMILE string in an existing</span> 
- <span style="color: #DD4422">SQLite database file.</span> 
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to an existing SQLite database file</span>
- <span style="color: #DD4422">smile_str (str): A SMILE string to query the database</span>
- <span style="color: #DD4422">simple_smile (bool): Queries simplified smile strings in the</span>
- <span style="color: #DD4422">database if true</span>
- <span style="color: #DD4422"></span> 
- <span style="color: #DD4422">Returns a list with the ZINC ID, SMILE string, and simplified SMILE</span> 
- <span style="color: #DD4422">string or an empty list if SMILE string could not be found.</span>
- <span style="color: #DD4422">Example returned list:</span>
- <span style="color: #DD4422">['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',</span>
- <span style="color: #DD4422">'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_dict</span>(sqlite_file):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Returns contents of an SQLite smilite database as Python dictionary object.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to an existing SQLite database file</span>
-
- <span style="color: #DD4422">Returns an SQLite smilite database as Python dictionary object with</span>
- <span style="color: #DD4422">ZINC IDs as keys and corresponding</span> 
- <span style="color: #DD4422">[SMILE_string, Simple_SMILE_string] lists as values.</span>
-
- <span style="color: #DD4422">Example returned dictionary:</span>
- <span style="color: #DD4422">{</span>
- <span style="color: #DD4422">'ZINC01234568': ['C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',</span> 
- <span style="color: #DD4422">'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O'],</span> 
- <span style="color: #DD4422">'ZINC01234567': ['C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',</span> 
- <span style="color: #DD4422">'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']</span>
- <span style="color: #DD4422">}</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-
-<pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">sqlite_to_csv</span>(sqlite_file, csv_file):
-    <span style="color: #DD4422">"""</span>
- <span style="color: #DD4422">Writes contents of an SQLite smilite database to a CSV file.</span>
-
- <span style="color: #DD4422">Keyword arguments:</span>
- <span style="color: #DD4422">sqlite_file (str): Path to an existing SQLite database file</span>
- <span style="color: #DD4422">csv_file (str): Path to the output CSV file</span>
-
- <span style="color: #DD4422">Example output CSV file contents:</span>
-
- <span style="color: #DD4422">ZINC_ID,SMILE,SIMPLE_SMILE</span>
- <span style="color: #DD4422">ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O</span>
- <span style="color: #DD4422">ZINC01234568,C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O,CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O</span>
- <span style="color: #DD4422">...</span>
-
- <span style="color: #DD4422">"""</span>
-</pre>
-
-</div>
-
-An example output CSV file from an SQLite smilite database is shown in the image below. ![https://raw.github.com/rasbt/smilite/master/images/sqlite_to_csv_1.png](https://raw.github.com/rasbt/smilite/master/images/sqlite_to_csv_1.png)
-
-<a name="contact"></a>
-
-# Contact
-
-If you have any questions or comments about smilite, please feel free to contact me via  
-eMail: [se.raschka@gmail.com](mailto:se.raschka@gmail.com)  
-or Twitter: [@rasbt](https://twitter.com/rasbt)
 
 <a name="changelog"></a>
 
 # Changelog
 
+**VERSION 2.2.0**
+
+*   Provides an optional command line argument (zinc15) to use ZINC15 as a backend for downloading SMILES
+
 **VERSION 2.1.0**
 
-*   Functions and scripts to fetch ZINC IDs corresponding to a SMILE string query
+*   Functions and scripts to fetch ZINC IDs corresponding to a SMILES string query
 
 **VERSION 2.0.1**
 
@@ -597,7 +309,7 @@ or Twitter: [@rasbt](https://twitter.com/rasbt)
 
 **VERSION 1.3.0**
 
-*   added script and module function to compare SMILE strings across 2 files.
+*   added script and module function to compare SMILES strings across 2 files.
 
 **VERSION 1.2.0**
 

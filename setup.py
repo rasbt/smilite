@@ -52,13 +52,6 @@ of chemical compounds from ZINC
 http://zinc.docking.org).
 Now supports both Python 3.x and Python 2.x.
 
-
-Contact
-=============
-
-If you have any questions or comments about smilite, please feel free to
-contact me via
-eMail: se.raschka@gmail.com
-or Twitter: https://twitter.com/rasbt
+Source repository: https://github.com/rasbt/smilite
 
 """)
