@@ -1,9 +1,10 @@
 # Copyright 2014 Sebastian Raschka
-# 
+#
 # smilite is a Python module to download and analyze SMILE strings
 # (Simplified Molecular-Input Line-entry System) of chemical compounds
-# from ZINC (a free database of commercially-available compounds for virtual screening:
-# http://zinc.docking.org    
+# from ZINC (a free database of commercially-available compounds
+# for virtual screening:
+# http://zinc.docking.org
 # Now supports both Python 3.x and Python 2.x.
 
 import sys
@@ -34,25 +35,29 @@ def get_zinc_smile(zinc_id):
     stripped_id = zinc_id.strip('ZINC')
     smile_str = None
     try:
-        if sys.version_info[0] == 3: 
-            response = urllib.request.urlopen('http://zinc.docking.org/substance/{}'\
-                                             .format(stripped_id))
+        if sys.version_info[0] == 3:
+            response = urllib.request.urlopen(
+                'http://zinc.docking.org/substance/{}'
+                .format(stripped_id))
         else:
-            response = urllib.urlopen('http://zinc.docking.org/substance/{}'\
-                                             .format(stripped_id))
+            response = urllib.urlopen('http://zinc.docking.org/substance/{}'
+                                      .format(stripped_id))
     except urllib.error.HTTPError:
         print('Invalid ZINC ID {}'.format(zinc_id))
         response = []
     for line in response:
         line = line.decode(encoding='UTF-8').strip()
-        if line.startswith('<a href="//zinc.docking.org/search/structure?smiles='):
-            line = line.split('<a href="//zinc.docking.org/search/structure?smiles=')[-1].split('">Draw</a>')[0]
+        if line.startswith('<a href="//zinc.docking.org'
+                           '/search/structure?smiles='):
+            line = (line.split('<a href="//zinc.docking.org/'
+                               'search/structure?smiles=')[-1]
+                    .split('">Draw</a>')[0])
             if sys.version_info[0] == 3:
                 smile_str = urllib.parse.unquote(line)
             else:
                 smile_str = urllib.unquote(line)
             break
-    return smile_str    
+    return smile_str
 
 
 def get_zincid_from_smile(smile_str):
@@ -61,26 +66,31 @@ def get_zincid_from_smile(smile_str):
     the ZINC online database. Requires an internet connection.
 
     Keyword arguments:
-        smile_str (str): A valid SMILE string, e.g. 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O' 
+        smile_str (str): A valid SMILE string, e.g.,
+            C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O'
 
     Returns the SMILE string for the corresponding ZINC ID(s) in a list.
         E.g., ['ZINC01234567', 'ZINC01234568', 'ZINC01242053', 'ZINC01242055']
 
     """
     stripped_smile = smile_str.strip()
-   
+
     zinc_ids = []
     url_part1 = 'http://zinc.docking.org/results?structure.smiles='
     url_part3 = '&structure.similarity=1.0'
     try:
         if sys.version_info[0] == 3:
-            smile_url = urllib.request.pathname2url(stripped_smile) 
-            response = urllib.request.urlopen('{}{}{}'\
-                                             .format(url_part1, smile_url, url_part3))
+            smile_url = urllib.request.pathname2url(stripped_smile)
+            response = urllib.request.urlopen('{}{}{}'
+                                              .format(url_part1,
+                                                      smile_url,
+                                                      url_part3))
         else:
             smile_url = urllib.pathname2url(stripped_smile)
-            response = urllib.urlopen('{}{}{}'\
-                                             .format(url_part1, smile_url, url_part3))
+            response = urllib.urlopen('{}{}{}'
+                                      .format(url_part1,
+                                              smile_url,
+                                              url_part3))
     except urllib.error.HTTPError:
         print('Invalid SMILE string {}'.format(smile_str))
         response = []
@@ -92,19 +102,19 @@ def get_zincid_from_smile(smile_str):
                 zinc_id = urllib.parse.unquote(line)
             else:
                 zinc_id = urllib.unquote(line)
-            zinc_id = 'ZINC' + (8-len(zinc_id)) *'0' + zinc_id
+            zinc_id = 'ZINC' + (8-len(zinc_id)) * '0' + zinc_id
             zinc_ids.append(str(zinc_id))
-    return zinc_ids    
-     
+    return zinc_ids
+
 
 def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
     """
-    Generates a CSV file of ZINC_ID,SMILE_string entries by querying the ZINC online
-    database.
+    Generates a CSV file of ZINC_ID,SMILE_string entries
+    by querying the ZINC online database.
 
     Keyword arguments:
-        zincid_list (str): Path to a UTF-8 or ASCII formatted file 
-             that contains 1 ZINC_ID per row. E.g., 
+        zincid_list (str): Path to a UTF-8 or ASCII formatted file
+             that contains 1 ZINC_ID per row. E.g.,
              ZINC0000123456
              ZINC0000234567
              [...]
@@ -116,7 +126,7 @@ def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
     with open(zincid_list, 'r') as infile:
         all_lines = infile.readlines()
         if print_progress_bar:
-           pbar = pyprind.ProgBar(len(all_lines), title='Downloading SMILES')
+            pbar = pyprind.ProgBar(len(all_lines), title='Downloading SMILES')
         for line in all_lines:
             line = line.strip()
             id_smile_pairs.append((line, get_zinc_smile(line)))
@@ -127,35 +137,36 @@ def generate_zincid_smile_csv(zincid_list, out_file, print_progress_bar=True):
             out.write('{},{}\n'.format(p[0], p[1]))
 
 
-def check_duplicate_smiles(zincid_list, out_file, compare_simplified_smiles=False):
+def check_duplicate_smiles(zincid_list, out_file,
+                           compare_simplified_smiles=False):
     """
     Scans a ZINC_ID,SMILE_string CSV file for duplicate SMILE strings.
 
     Keyword arguments:
-        zincid_list (str): Path to a UTF-8 or ASCII formatted file that 
+        zincid_list (str): Path to a UTF-8 or ASCII formatted file that
                contains 1 ZINC_ID + 1 SMILE String per row.
-               E.g., 
+               E.g.,
                ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC
                ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
                [...]
         out_file (str): Path to a new output CSV file that will be written.
-        compare_simplified_smiles (bool): If true, SMILE strings will be simplified
-               for the comparison.
-       
+        compare_simplified_smiles (bool): If true, S
+               SMILE strings will be simplified for the comparison.
+
     """
     smile_dict = dict()
     with open(zincid_list, 'r') as infile:
         all_lines = infile.readlines()
         for line in all_lines:
-             line = line.strip().split(',')
-             if len(line) == 2:
-                 zinc_id,smile_str = line
-             if compare_simplified_smiles:
-                 smile_str = simplify_smile(smile_str)
-             if smile_str not in smile_dict:
-                 smile_dict[smile_str] = [zinc_id]
-             else:
-                 smile_dict[smile_str].append(zinc_id)
+            line = line.strip().split(',')
+            if len(line) == 2:
+                zinc_id, smile_str = line
+            if compare_simplified_smiles:
+                smile_str = simplify_smile(smile_str)
+            if smile_str not in smile_dict:
+                smile_dict[smile_str] = [zinc_id]
+            else:
+                smile_dict[smile_str].append(zinc_id)
 
     with open(out_file, 'w') as out:
         out.write('zinc_id,smile_str,duplicates')
@@ -172,9 +183,9 @@ def create_id_smile_list(id_smile_csv, simplify_smiles=False):
     Reads in a CSV file and returns a list of [ZINC_ID,SMILE_STR] sublists.
 
     Keyword arguments:
-        id_smile_csv (str): Path to a UTF-8 or ASCII formatted file that 
+        id_smile_csv (str): Path to a UTF-8 or ASCII formatted file that
                contains 1 ZINC_ID + 1 SMILE String per row.
-               E.g., 
+               E.g.,
                ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC
                ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
                [...]
@@ -185,32 +196,33 @@ def create_id_smile_list(id_smile_csv, simplify_smiles=False):
     with open(id_smile_csv, 'r') as infile:
         all_lines = infile.readlines()
         for line in all_lines:
-             line = line.strip().split(',')
-             if len(line) == 2:
-                 zinc_id,smile_str = line
-             if simplify_smiles:
-                 smile_str = simplify_smile(smile_str)
-             smile_list.append([zinc_id,smile_str])
+            line = line.strip().split(',')
+            if len(line) == 2:
+                zinc_id, smile_str = line
+            if simplify_smiles:
+                smile_str = simplify_smile(smile_str)
+            smile_list.append([zinc_id, smile_str])
     return smile_list
 
 
-def comp_two_csvfiles(zincid_list1, zincid_list2, out_file, compare_simplified_smiles=False):
+def comp_two_csvfiles(zincid_list1, zincid_list2, out_file,
+                      compare_simplified_smiles=False):
     """
-    Compares SMILE strings across two ZINC_ID CSV files for duplicates 
+    Compares SMILE strings across two ZINC_ID CSV files for duplicates
     (does not check for duplicates within each file).
 
     Keyword arguments:
-        zincid_list1 (str): Path to a UTF-8 or ASCII formatted file that 
+        zincid_list1 (str): Path to a UTF-8 or ASCII formatted file that
                contains 1 ZINC_ID + 1 SMILE String per row.
-               E.g., 
+               E.g.,
                ZINC12345678,Cc1ccc(cc1C)OCCOc2c(cc(cc2I)/C=N/n3cnnc3)OC
                ZINC01234567,C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O
                [...]
-        zincid_list2 (str): Second ZINC_ID list file, similarly 
+        zincid_list2 (str): Second ZINC_ID list file, similarly
         out_file (str): Path to a new output CSV file that will be written.
-        compare_simplified_smiles (bool): If true, SMILE strings will be simplified
-               for the comparison.
-       
+        compare_simplified_smiles (bool): If true,
+               SMILE strings will be simplified for the comparison.
+
     """
     smile_list1 = create_id_smile_list(zincid_list1, compare_simplified_smiles)
     smile_list2 = create_id_smile_list(zincid_list2, compare_simplified_smiles)
@@ -233,14 +245,14 @@ def comp_two_csvfiles(zincid_list1, zincid_list2, out_file, compare_simplified_s
 
 
 def simplify_smile(smile_str):
-    """ 
-    Simplifies a SMILE string by removing hydrogen atoms (H), 
+    """
+    Simplifies a SMILE string by removing hydrogen atoms (H),
     chiral specifications ('@'), charges (+ / -), '#'-characters,
     and square brackets ('[', ']').
 
     Keyword Arguments:
         smile_str (str): A smile string, e.g., C[C@H](CCC(=O)NCCS(=O)(=O)[O-])
-    
+
     Returns a simplified SMILE string, e.g., CC(CCC(=O)NCCS(=O)(=O)O)
 
     """
@@ -257,11 +269,12 @@ def simplify_smile(smile_str):
 def create_sqlite(sqlite_file):
     """
     Creates a new SQLite database file if it doesn't exist yet.
-    The database created will consists of 3 columns: 
+    The database created will consists of 3 columns:
         1) 'zinc_id' (ZINC ID as Primary Key)
         2) 'smile' (SMILE string obtained from the ZINC online db)
-        3) 'simple_smile' (simplified SMILE string, see smilite.simplify_smile())
-    
+        3) 'simple_smile' (simplified SMILE string,
+            see smilite.simplify_smile())
+
     Keyword arguments:
         sqlite_file (str): Path to the new SQLite database file.
 
@@ -269,10 +282,11 @@ def create_sqlite(sqlite_file):
     if not os.path.exists(sqlite_file):
         # open connection to a sqlite file object
         conn = sqlite3.connect(sqlite_file)
-        c = conn.cursor()   
-        
+        c = conn.cursor()
+
         # creating a new SQLite table with 3 columns
-        c.execute('CREATE TABLE smilite (zinc_id TEXT PRIMARY KEY, smile TEXT, simple_smile TEXT)')
+        c.execute('CREATE TABLE smilite (zinc_id TEXT PRIMARY KEY,'
+                  ' smile TEXT, simple_smile TEXT)')
 
         # commit changes and close the connection to the sqlite file object.
         conn.commit()
@@ -301,7 +315,7 @@ def insert_id_sqlite(sqlite_file, zinc_id):
     if os.path.exists(sqlite_file):
         # open connection to a sqlite file object
         conn = sqlite3.connect(sqlite_file)
-        c = conn.cursor() 
+        c = conn.cursor()
 
         # get smile string and simplified smile string
         smile_str = get_zinc_smile(zinc_id)
@@ -310,8 +324,9 @@ def insert_id_sqlite(sqlite_file, zinc_id):
 
         # insert data into database
         if smile_str and simple_smile:
-            c.execute('INSERT OR IGNORE INTO smilite (zinc_id, smile, simple_smile) VALUES (?, ?, ?)',\
-                    (zinc_id, smile_str, simple_smile))
+            c.execute('INSERT OR IGNORE INTO smilite (zinc_id, smile,'
+                      ' simple_smile) VALUES (?, ?, ?)',
+                      (zinc_id, smile_str, simple_smile))
             success = True
 
         # commit changes and close the connection to the sqlite file object.
@@ -325,13 +340,13 @@ def insert_id_sqlite(sqlite_file, zinc_id):
 
 def lookup_id_sqlite(sqlite_file, zinc_id):
     """
-    Looks up an ZINC ID in an existing SQLite database file.    
-    
+    Looks up an ZINC ID in an existing SQLite database file.
+
     Keyword arguments:
         sqlite_file (str): Path to an existing SQLite database file
         zinc_id (str): A valid ZINC ID
 
-    Returns a list with the ZINC ID, SMILE string, and simplified SMILE 
+    Returns a list with the ZINC ID, SMILE string, and simplified SMILE
         string or an empty list if ZINC ID could not be found.
         Example returned list:
         ['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
@@ -343,7 +358,7 @@ def lookup_id_sqlite(sqlite_file, zinc_id):
 
         # open connection to a sqlite file object
         conn = sqlite3.connect(sqlite_file)
-        c = conn.cursor() 
+        c = conn.cursor()
 
         c.execute('SELECT * FROM smilite WHERE zinc_id=?', (zinc_id,))
         all_rows = c.fetchall()
@@ -360,16 +375,16 @@ def lookup_id_sqlite(sqlite_file, zinc_id):
 
 def lookup_smile_sqlite(sqlite_file, smile_str, simple_smile=False):
     """
-    Looks up an ZINC ID for a given SMILE string in an existing 
-    SQLite database file.    
-    
+    Looks up an ZINC ID for a given SMILE string in an existing
+    SQLite database file.
+
     Keyword arguments:
         sqlite_file (str): Path to an existing SQLite database file
         smile_str (str): A SMILE string to query the database
         simple_smile (bool): Queries simplified smile strings in the
             database if true
-        
-    Returns a list with the ZINC ID, SMILE string, and simplified SMILE 
+
+    Returns a list with the ZINC ID, SMILE string, and simplified SMILE
         string or an empty list if SMILE string could not be found.
         Example returned list:
         ['ZINC01234567', 'C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
@@ -383,10 +398,11 @@ def lookup_smile_sqlite(sqlite_file, smile_str, simple_smile=False):
 
         # open connection to a sqlite file object
         conn = sqlite3.connect(sqlite_file)
-        c = conn.cursor() 
-        
+        c = conn.cursor()
+
         if simple_smile:
-            c.execute('SELECT * FROM smilite WHERE simple_smile=?', (smile_str,))
+            c.execute('SELECT * FROM smilite WHERE simple_smile=?',
+                      (smile_str,))
         else:
             c.execute('SELECT * FROM smilite WHERE smile=?', (smile_str,))
         all_rows = c.fetchall()
@@ -410,14 +426,14 @@ def sqlite_to_dict(sqlite_file):
         sqlite_file (str): Path to an existing SQLite database file
 
     Returns an SQLite smilite database as Python dictionary object with
-        ZINC IDs as keys and corresponding 
+        ZINC IDs as keys and corresponding
         [SMILE_string, Simple_SMILE_string] lists as values.
 
     Example returned dictionary:
     {
-        'ZINC01234568': ['C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O', 
-                        'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O'], 
-        'ZINC01234567': ['C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O', 
+        'ZINC01234568': ['C[C@@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
+                        'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O'],
+        'ZINC01234567': ['C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O',
                         'CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O']
     }
 
@@ -427,8 +443,8 @@ def sqlite_to_dict(sqlite_file):
 
         # open connection to a sqlite file object
         conn = sqlite3.connect(sqlite_file)
-        c = conn.cursor() 
-       
+        c = conn.cursor()
+
         c.execute('SELECT * FROM smilite')
         all_rows = c.fetchall()
         try:

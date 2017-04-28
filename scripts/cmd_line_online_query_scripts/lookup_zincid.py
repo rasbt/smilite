@@ -4,7 +4,7 @@
 # from the online ZINC database.
 #
 #
-# Usage: 
+# Usage:
 # [shell]>> python3 lookup_zincid.py ZINC_ID
 #
 # Example (retrieve data from the ZINC online database):
@@ -26,10 +26,12 @@
 import smilite
 import sys
 
+
 def print_usage():
     print('\nUSAGE: python3 lookup_zincid.py ZINC_ID')
-    print('\n\nEXAMPLE (retrieve data from ZINC):\n'\
+    print('\n\nEXAMPLE (retrieve data from ZINC):\n'
           'python3 lookup_zincid.py ZINC01234567')
+
 
 smile_str = ''
 simple_smile_str = ''
@@ -45,8 +47,7 @@ try:
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
     print_usage()
-    
+
 except IndexError:
     print('\n\nERROR: Invalid command line arguments.')
     print_usage()
-
