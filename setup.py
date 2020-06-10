@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='smilite',
-      version='2.2.0',
+      version='2.3.0',
       description='smilite is a Python module to download'
                   ' and analyze SMILE strings',
       author='Sebastian Raschka',
@@ -18,7 +18,6 @@ setup(name='smilite',
           'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
           'Development Status :: 5 - Production/Stable',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 2.7',
           'Environment :: Console',
       ],
       long_description="""
@@ -28,7 +27,6 @@ smilite is a Python module to download and analyze SMILE strings
 of chemical compounds from ZINC
 (a free database of commercially-available compounds for virtual screening,
 http://zinc.docking.org).
-Now supports both Python 3.x and Python 2.x.
 
 Source repository: https://github.com/rasbt/smilite
 
