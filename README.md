@@ -291,6 +291,11 @@ An example of the CSV file contents opened in an spreadsheet program is shown in
 
 # Changelog
 
+**VERSION 2.3.0 (06/10/2020)**
+
+- Fixes ZINC URL in `lookup_smile_str.py`
+- Adds an optional command line parameter (with arguments `zinc15` or `zinc12`) for `lookup_smile_str.py`
+
 **VERSION 2.2.0**
 
 *   Provides an optional command line argument (zinc15) to use ZINC15 as a backend for downloading SMILES

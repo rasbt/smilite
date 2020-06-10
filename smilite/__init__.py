@@ -1,4 +1,4 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # A small module to retrieve SMILE strings 
 # (Simplified molecular-input line-entry system) from the ZINC online
@@ -18,5 +18,5 @@ from .smilite import sqlite_to_dict
 from .smilite import sqlite_to_csv
 from .smilite import get_zincid_from_smile
 
-__version__ = '2.1.1'
+__version__ = '2.3.0'
 

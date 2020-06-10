@@ -28,7 +28,7 @@ import sys
 
 
 def print_usage():
-    print('\nUSAGE: python3 lookup_zincid.py ZINC_ID [zinc12 (default)/zinc15]')
+    print('\nUSAGE: python3 lookup_zincid.py ZINC_ID [zinc12 (def.) / zinc15]')
     print('\n\nEXAMPLES (retrieve data from ZINC):\n'
           '1) python3 lookup_zincid.py ZINC01234567 zinc12\n'
           '2) python3 lookup_zincid.py ZINC01234567 zinc15')
