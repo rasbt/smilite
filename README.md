@@ -291,6 +291,10 @@ An example of the CSV file contents opened in an spreadsheet program is shown in
 
 # Changelog
 
+**VERSION 2.3.1 (07/25/2020)**
+
+- Fix bug to allow `zinc15` option in gen_zincid_smile_csv.py script 
+
 **VERSION 2.3.0 (06/10/2020)**
 
 - Fixes ZINC URL in `lookup_smile_str.py`
