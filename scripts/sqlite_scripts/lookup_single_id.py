@@ -1,16 +1,19 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Retrieves the SMILE string and simplified SMILE string for a given ZINC ID
-# from a previously built smilite SQLite database or from the online ZINC database.
+# from a previously built smilite SQLite database
+# or from the online ZINC database.
 #
 #
-# Usage: 
+# Usage:
 # [shell]>> python3 lookup_single_id.py ZINC_ID [sqlite_file]
 #
-# Example1 (retrieve data from a smilite SQLite database):
-# [shell]>> python3 lookup_single_id.py ZINC01234567 ~/Desktop/smilite_db.sqlite
+# Example 1 (retrieve data from a smilite SQLite database):
+# [shell]>> python3 lookup_single_id.py
+#  ZINC01234567 \
+#  ~/Desktop/smilite_db.sqlite
 #
-# Example2 (retrieve data from the ZINC online database):
+# Example 2 (retrieve data from the ZINC online database):
 # [shell]>> python3 lookup_single_id.py ZINC01234567
 #
 #
@@ -26,18 +29,18 @@
 #     3rd row: simplified SMILE string
 #
 
-
-
 import smilite
 import sys
 
 
 def print_usage():
-    print('\nUSAGE:  python3 lookup_single_id.py ZINC_ID [sqlite_file]')
-    print('\n\nEXAMPLE1 (retrieve data from a smilite SQLite database):\n'\
-          'python3 lookup_single_id.py ZINC01234567 ~/Desktop/smilite_db.sqlite')
-    print('\n\nEXAMPLE2 (retrieve data from the ZINC online database):\n'\
+    print('\nUSAGE: python3 lookup_single_id.py ZINC_ID [sqlite_file]')
+    print('\n\nEXAMPLE1 (retrieve data from a smilite SQLite database):\n'
+          'python3 lookup_single_id.py ZINC01234567 '
+          '~/Desktop/smilite_db.sqlite')
+    print('\n\nEXAMPLE2 (retrieve data from the ZINC online database):\n'
           'python3 lookup_single_id.py ZINC01234567\n')
+
 
 smile_str = ''
 simple_smile_str = ''
@@ -48,7 +51,7 @@ try:
     if len(sys.argv) > 2:
         sqlite_file = sys.argv[2]
         lookup_result = smilite.lookup_id_sqlite(sqlite_file, zinc_id)
-        try: 
+        try:
             smile_str, simple_smile_str = lookup_result[1], lookup_result[2]
         except IndexError:
             pass
@@ -63,8 +66,7 @@ try:
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
     print_usage()
-    
+
 except IndexError:
     print('\n\nERROR: Invalid command line arguments.')
     print_usage()
-

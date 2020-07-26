@@ -1,4 +1,4 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Compares SMILE strings within a 2 column CSV file (ZINC_ID,SMILE_string) to
 # identify duplicates. Generates a new CSV file with ZINC IDs of identified
@@ -23,14 +23,18 @@
 #     3rd column: number of duplicates
 #     4th-nth column: ZINC IDs of duplicates
 #
-# Usage: 
+# Usage:
 # [shell]>> python3 comp_smile_strings.py in.csv out.csv [simplify]
 #
-# Example1:
-# [shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv
+# Example 1:
+# [shell]>> python3 gen_zincid_smile_csv.py \
+#  ../examples/zinc_ids.csv \
+#  ../examples/zid_smiles.csv
 #
-# Example2:
-# [shell]>> python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify
+# Example 2:
+# [shell]>> python3 comp_smile_strings.py \
+# ../examples/zid_smiles.csv \
+# ../examples/comp_simple_smiles.csv simplify
 
 
 import smilite
@@ -39,26 +43,28 @@ import sys
 
 def print_usage():
     print('\nUSAGE: python3 comp_smile_strings.py in.csv out.csv [simplify]')
-    print('\nEXAMPLE1: python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_smiles.csv\n')
-    print('\nEXAMPLE2: python3 comp_smile_strings.py ../examples/zid_smiles.csv ../examples/comp_simple_smiles.csv simplify\n')
+    print('\nEXAMPLE 1: python3 comp_smile_strings.py'
+          ' ../examples/zid_smiles.csv ../examples/comp_smiles.csv\n')
+    print('\nEXAMPLE 2: python3 comp_smile_strings.py'
+          ' ../examples/zid_smiles.csv'
+          ' ../examples/comp_simple_smiles.csv simplify\n')
 
 
 try:
     in_csv = sys.argv[1]
     out_csv = sys.argv[2]
     simplify = False
-    
+
     if len(sys.argv) > 3:
         simplify = True
-    
-    smilite.check_duplicate_smiles(in_csv, out_csv, compare_simplified_smiles=simplify)
+
+    smilite.check_duplicate_smiles(in_csv, out_csv,
+                                   compare_simplified_smiles=simplify)
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
     print_usage()
-    
+
 except IndexError:
     print('\n\nERROR: Invalid command line arguments.')
     print_usage()
-
-

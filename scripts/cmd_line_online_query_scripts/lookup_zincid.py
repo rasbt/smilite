@@ -1,4 +1,4 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Retrieves the SMILE string and simplified SMILE string for a given ZINC ID
 # from the online ZINC database.

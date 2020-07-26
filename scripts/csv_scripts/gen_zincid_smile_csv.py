@@ -1,4 +1,4 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Generates a ZINC_ID,SMILE_STR csv file from a input file of
 # ZINC IDs. The input file should consist of 1 columns with 1 ZINC ID per row.
@@ -14,10 +14,12 @@
 #      ...
 #
 # Usage:
-# [shell]>> python3 gen_zincid_smile_csv.py in.csv out.csv [zinc12 (default)/zinc15]
+# [shell]>> python3 gen_zincid_smile_csv.py \
+# in.csv out.csv [zinc12 (default) / zinc15]
 #
 # Example:
-# [shell]>> python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv zinc15
+# [shell]>> python3 gen_zincid_smile_csv.py \
+# ../examples/zinc_ids.csv ../examples/zid_smiles.csv zinc15
 
 
 import smilite
@@ -25,8 +27,10 @@ import sys
 
 
 def print_usage():
-    print('\nUSAGE: python3 gen_zincid_smile_csv.py in.csv out.csv [zinc12 (default)/zinc15]')
-    print('\nEXAMPLE: python3 gen_zincid_smile_csv.py ../examples/zinc_ids.csv ../examples/zid_smiles.csv zinc12\n')
+    print('\nUSAGE: python3 gen_zincid_smile_csv.py'
+          ' in.csv out.csv [zinc12 (default) / zinc15]')
+    print('\nEXAMPLE: python3 gen_zincid_smile_csv.py '
+          '../examples/zinc_ids.csv ../examples/zid_smiles.csv zinc12\n')
 
 
 try:
@@ -39,7 +43,8 @@ try:
         backend = 'zinc12'
 
     smilite.generate_zincid_smile_csv(in_csv, out_csv,
-                                      print_progress_bar=True, backend='zinc12')
+                                      print_progress_bar=True,
+                                      backend='zinc12')
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))

@@ -1,4 +1,4 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Writes contents of an SQLite smilite database to a CSV file.
 #

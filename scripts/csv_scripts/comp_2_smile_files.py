@@ -1,7 +1,8 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
-# Compares SMILE strings between 2 input CSV files, where each file consists of rows
-# with 2 columns ZINC_ID,SMILE_string to identify duplicate SMILE string across both files. 
+# Compares SMILE strings between 2 input CSV files, where each
+# file consists of rows with 2 columns ZINC_ID,SMILE_string to #
+# identify duplicate SMILE string across both files.
 # Generates a new CSV file with ZINC IDs of identified
 # duplicates listed in a 3rd-nth column(s).
 #
@@ -29,14 +30,20 @@
 #     3rd column: SMILE string
 #     4th-nth column: ZINC IDs of duplicates
 #
-# Usage: 
+# Usage:
 # [shell]>> python3 comp_2_smile_files.py in1.csv in2.csv out.csv [simplify]
 #
-# Example1:
-# [shell]>> python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv
+# Example 1:
+# [shell]>> python3 comp_2_smile_files.py \
+# ../examples/zid_smiles2.csv \
+# ../examples/zid_smiles3.csv \
+# ../examples/comp_2_files.csv
 #
-# Example2:
-# [shell]>> python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv simplify
+# Example 2:
+# [shell]>> python3 comp_2_smile_files.py \
+# ../examples/zid_smiles2.csv \
+# ../examples/zid_smiles3.csv \
+# ../examples/comp_2_files.csv simplify
 
 
 import smilite
@@ -44,9 +51,14 @@ import sys
 
 
 def print_usage():
-    print('\nUSAGE: python3 comp_2_smile_files.py in1.csv in2.csv out.csv [simplify]')
-    print('\nEXAMPLE1: python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv\n')
-    print('\nEXAMPLE2: python3 comp_2_smile_files.py ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv ../examples/comp_2_files.csv simplify\n')
+    print('\nUSAGE: python3 comp_2_smile_files.py'
+          ' in1.csv in2.csv out.csv [simplify]')
+    print('\nEXAMPLE 1: python3 comp_2_smile_files.py'
+          ' ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv'
+          ' ../examples/comp_2_files.csv\n')
+    print('\nEXAMPLE 2: python3 comp_2_smile_files.py'
+          ' ../examples/zid_smiles2.csv ../examples/zid_smiles3.csv'
+          ' ../examples/comp_2_files.csv simplify\n')
 
 
 try:
@@ -54,18 +66,17 @@ try:
     in_csv2 = sys.argv[2]
     out_csv = sys.argv[3]
     simplify = False
-    
+
     if len(sys.argv) > 4:
         simplify = True
-    
-    smilite.comp_two_csvfiles(in_csv1, in_csv2, out_csv, compare_simplified_smiles=simplify)
+
+    smilite.comp_two_csvfiles(in_csv1, in_csv2,
+                              out_csv, compare_simplified_smiles=simplify)
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
     print_usage()
-    
+
 except IndexError:
     print('\n\nERROR: Invalid command line arguments.')
     print_usage()
-
-

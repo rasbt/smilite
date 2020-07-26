@@ -1,17 +1,19 @@
-# Copyright 2014 Sebastian Raschka
+# Copyright 2014-2020 Sebastian Raschka
 #
 # Retrieves the ZINC ID(s) for a given SMILE sting or simplified SMILE string
 # from a previously built smilite SQLite database.
 #
 #
-# Usage: 
+# Usage:
 # [shell]>> python3 lookup_smile.py sqlite_file SMILE_STRING [simplify]
 #
-# Example1 (search for SMILE string):
-# [shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"
+# Example 1 (search for SMILE string):
+# [shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite \
+# "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"
 #
-# Example2 (search for simplified SMILE string):
-# [shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite "CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O" simple
+# Example 2 (search for simplified SMILE string):
+# [shell]>> python3 lookup_smile.py ~/Desktop/smilite.sqlite \
+# "CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O" simple
 #
 #
 #
@@ -26,18 +28,20 @@
 #     3rd row: simplified SMILE string
 #
 
-
-
 import smilite
 import sys
 
 
 def print_usage():
-    print('\nUSAGE: python3 lookup_smile.py sqlite_file SMILE_STRING [simplify]')
-    print('\n\nEXAMPLE1 (search for SMILE string):\n'\
-          'python3 lookup_smile.py ~/Desktop/smilite.sqlite "C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"')
-    print('\n\nEXAMPLE2 (search for simplified SMILE string):\n'\
-          'python3 lookup_smile.py ~/Desktop/smilite.sqlite "CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O simple\n"')
+    print('\nUSAGE: python3 lookup_smile.py '
+          'sqlite_file SMILE_STRING [simplify]')
+    print('\n\nEXAMPLE1 (search for SMILE string):\n'
+          'python3 lookup_smile.py ~/Desktop/smilite.sqlite '
+          '"C[C@H]1CCCC[NH+]1CC#CC(c2ccccc2)(c3ccccc3)O"')
+    print('\n\nEXAMPLE2 (search for simplified SMILE string):\n'
+          'python3 lookup_smile.py ~/Desktop/smilite.sqlite '
+          '"CC1CCCCN1CCCC(C2CCCCC2)(C3CCCCC3)O simple\n"')
+
 
 zinc_id = ''
 simple_smile = False
@@ -47,7 +51,7 @@ try:
     smile = sys.argv[2]
     if len(sys.argv) > 3:
         simple_smile = True
-                
+
     result = smilite.lookup_smile_sqlite(sqlite_file, smile, simple_smile)
     for i in result:
         if isinstance(i, list):
@@ -56,12 +60,11 @@ try:
         else:
             print(i)
 
-    
+
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
     print_usage()
-    
+
 except IndexError:
     print('\n\nERROR: Invalid command line arguments.')
     print_usage()
-
