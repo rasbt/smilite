@@ -44,7 +44,7 @@ try:
 
     smilite.generate_zincid_smile_csv(in_csv, out_csv,
                                       print_progress_bar=True,
-                                      backend='zinc12')
+                                      backend=backend)
 
 except IOError as err:
     print('\n\nERROR: {}'.format(err))
